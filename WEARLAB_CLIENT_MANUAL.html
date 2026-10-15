@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>WEARLAB — Website Operations & Client Handover Manual</title>
+<style>
+  @page {
+    size: A4;
+    margin: 18mm 16mm 18mm 16mm;
+    @bottom-right {
+      content: counter(page);
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #1a1a1a;
+    background: #ffffff;
+    line-height: 1.55;
+    font-size: 10pt;
+  }
+
+  /* Cover Page */
+  .cover {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 60px 40px;
+    border: 2px solid #111111;
+    page-break-after: always;
+  }
+
+  .cover-top {
+    border-bottom: 3px solid #111111;
+    padding-bottom: 24px;
+  }
+
+  .brand-logo {
+    font-size: 38pt;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+    color: #111111;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .brand-sub {
+    font-size: 10pt;
+    letter-spacing: 0.3em;
+    color: #666666;
+    text-transform: uppercase;
+  }
+
+  .cover-middle {
+    margin: 40px 0;
+  }
+
+  .cover-badge {
+    display: inline-block;
+    background: #111111;
+    color: #ffffff;
+    padding: 6px 14px;
+    font-size: 9pt;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .cover-title {
+    font-size: 26pt;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #111111;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
+  }
+
+  .cover-desc {
+    font-size: 12pt;
+    color: #555555;
+    max-width: 580px;
+    line-height: 1.6;
+  }
+
+  .cover-bottom {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 9pt;
+    color: #555555;
+  }
+
+  .cover-meta-col strong {
+    display: block;
+    color: #111111;
+    font-size: 10pt;
+    margin-bottom: 4px;
+  }
+
+  /* Content Styling */
+  .page {
+    padding: 10px 0;
+  }
+
+  .page-break {
+    page-break-after: always;
+  }
+
+  h1.section-title {
+    font-size: 18pt;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: #111111;
+    border-bottom: 2px solid #111111;
+    padding-bottom: 8px;
+    margin-top: 24px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+  }
+
+  h1.section-title .sec-num {
+    background: #111111;
+    color: #ffffff;
+    font-size: 10pt;
+    font-weight: 700;
+    padding: 4px 10px;
+    margin-right: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  h2 {
+    font-size: 12.5pt;
+    font-weight: 700;
+    color: #111111;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    border-left: 3px solid #111111;
+    padding-left: 10px;
+  }
+
+  h3 {
+    font-size: 10.5pt;
+    font-weight: 700;
+    color: #222222;
+    margin-top: 12px;
+    margin-bottom: 6px;
+  }
+
+  p {
+    margin-bottom: 10px;
+    color: #333333;
+    font-size: 9.5pt;
+    text-align: justify;
+  }
+
+  ul, ol {
+    margin-left: 20px;
+    margin-bottom: 12px;
+    font-size: 9.5pt;
+  }
+
+  li {
+    margin-bottom: 4px;
+  }
+
+  code {
+    background: #f0f0f0;
+    padding: 2px 6px;
+    font-family: Consolas, monospace;
+    font-size: 8.5pt;
+    color: #111111;
+    border-radius: 3px;
+  }
+
+  /* Table styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0 18px 0;
+    font-size: 9pt;
+    page-break-inside: avoid;
+  }
+
+  th {
+    background: #111111;
+    color: #ffffff;
+    text-align: left;
+    padding: 8px 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+  }
+
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #e5e5e5;
+    vertical-align: top;
+  }
+
+  tr:nth-child(even) td {
+    background: #fafafa;
+  }
+
+  /* Callout boxes */
+  .callout {
+    background: #f9f9f9;
+    border-left: 4px solid #111111;
+    padding: 12px 16px;
+    margin: 14px 0;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+  }
+
+  .callout-title {
+    font-weight: 700;
+    font-size: 9.5pt;
+    color: #111111;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+  }
+
+  .callout-info {
+    border-left-color: #2563eb;
+    background: #eff6ff;
+  }
+
+  .callout-info .callout-title {
+    color: #1d4ed8;
+  }
+
+  .callout-tip {
+    border-left-color: #10b981;
+    background: #ecfdf5;
+  }
+
+  .callout-tip .callout-title {
+    color: #047857;
+  }
+
+  /* Workflow boxes */
+  .workflow-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 14px 0;
+    page-break-inside: avoid;
+  }
+
+  .workflow-step {
+    display: flex;
+    align-items: flex-start;
+    background: #fafafa;
+    border: 1px solid #e5e5e5;
+    padding: 10px 14px;
+  }
+
+  .wf-num {
+    background: #111111;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 9pt;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+
+  .wf-content strong {
+    display: block;
+    color: #111111;
+    font-size: 9.5pt;
+    margin-bottom: 2px;
+  }
+
+  .wf-content span {
+    font-size: 8.5pt;
+    color: #555555;
+  }
+
+  /* Checklist */
+  .checklist {
+    list-style: none;
+    margin-left: 0;
+    margin: 12px 0;
+  }
+
+  .checklist li {
+    padding: 6px 10px;
+    background: #fafafa;
+    border: 1px solid #ebebeb;
+    margin-bottom: 6px;
+    font-size: 9pt;
+    display: flex;
+    align-items: center;
+  }
+
+  .checkbox {
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid #111111;
+    display: inline-block;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+
+  /* Table of contents */
+  .toc {
+    background: #fdfdfd;
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    margin-bottom: 30px;
+    page-break-inside: avoid;
+  }
+
+  .toc-title {
+    font-size: 13pt;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-bottom: 2px solid #111111;
+    padding-bottom: 8px;
+    margin-bottom: 14px;
+  }
+
+  .toc-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px dotted #ccc;
+    font-size: 9.5pt;
+    color: #222222;
+  }
+
+  .toc-item strong {
+    color: #111111;
+  }
+
+  .footer-note {
+    margin-top: 30px;
+    border-top: 1px solid #e5e5e5;
+    padding-top: 12px;
+    font-size: 8pt;
+    color: #888888;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover">
+  <div class="cover-top">
+    <div class="brand-logo">WEARLAB</div>
+    <div class="brand-sub">EST. 2026 &bull; MODERN STREETWEAR &bull; LAHORE, PAKISTAN</div>
+  </div>
+
+  <div class="cover-middle">
+    <span class="cover-badge">OFFICIAL CLIENT HANDOVER DOCUMENT</span>
+    <h1 class="cover-title">WEBSITE OPERATIONS &amp; CLIENT MANAGEMENT MANUAL</h1>
+    <p class="cover-desc">
+      A complete, comprehensive operational guide for the day-to-day management of <strong>wearlab.store</strong>. 
+      Covers visual homepage customization, page and policy editing, catalog inventory management, 
+      Cash on Delivery (COD) fulfillment, order confirmation emails, and brand identity maintenance.
+    </p>
+  </div>
+
+  <div class="cover-bottom">
+    <div class="cover-meta-col">
+      <strong>STORE DOMAIN</strong>
+      wearlab.store
+    </div>
+    <div class="cover-meta-col">
+      <strong>THEME VERSION</strong>
+      WEARLAB Theme v1.5.1
+    </div>
+    <div class="cover-meta-col">
+      <strong>ECOMMERCE ENGINE</strong>
+      WordPress 6.4+ / WooCommerce
+    </div>
+    <div class="cover-meta-col">
+      <strong>DATE OF HANDOVER</strong>
+      September 2026
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 2: TABLE OF CONTENTS & CHAPTER 1 -->
+<div class="page">
+  <div class="toc">
+    <div class="toc-title">Table of Contents</div>
+    <div class="toc-item"><span><strong>01.</strong> Logging In to Your Website Dashboard</span><span>Section 1</span></div>
+    <div class="toc-item"><span><strong>02.</strong> Visual Homepage Editing (Live Customizer)</span><span>Section 2</span></div>
+    <div class="toc-item"><span><strong>03.</strong> Editing Website Pages &amp; Store Policies</span><span>Section 3</span></div>
+    <div class="toc-item"><span><strong>04.</strong> Product Catalog Management (Sizes, Prices, Sliders)</span><span>Section 4</span></div>
+    <div class="toc-item"><span><strong>05.</strong> Order Management &amp; Cash on Delivery (COD) Protocol</span><span>Section 5</span></div>
+    <div class="toc-item"><span><strong>06.</strong> Customer Order Confirmation Emails (Hostinger SMTP)</span><span>Section 6</span></div>
+    <div class="toc-item"><span><strong>07.</strong> Navigation Menus &amp; Footer Links Configuration</span><span>Section 7</span></div>
+    <div class="toc-item"><span><strong>08.</strong> Logo, Favicon &amp; Brand Identity Maintenance</span><span>Section 8</span></div>
+    <div class="toc-item"><span><strong>09.</strong> Discount Coupons &amp; Promotional Campaigns</span><span>Section 9</span></div>
+    <div class="toc-item"><span><strong>10.</strong> Daily Operations, Security &amp; Launch Readiness Checklist</span><span>Section 10</span></div>
+  </div>
+
+  <h1 class="section-title"><span class="sec-num">01</span> Logging In to Your Website Dashboard</h1>
+  <p>Your WEARLAB store runs on a customized, high-performance WordPress &amp; WooCommerce infrastructure. You have complete administrative control over all aspects of the store.</p>
+  
+  <div class="callout callout-info">
+    <div class="callout-title">ADMINISTRATIVE LOGIN CREDENTIALS</div>
+    <p style="margin-bottom: 4px;"><strong>Login URL:</strong> <code>https://wearlab.store/wp-admin</code></p>
+    <p style="margin-bottom: 4px;"><strong>Username / Email:</strong> <em>[Your Client Administrator Username]</em></p>
+    <p style="margin-bottom: 0;"><strong>Password:</strong> <em>[Your Secure Administrator Password]</em></p>
+  </div>
+
+  <p><strong>Step-by-Step Login Instructions:</strong></p>
+  <ol>
+    <li>Open Google Chrome, Microsoft Edge, or Safari on your computer or mobile tablet.</li>
+    <li>Enter <code>https://wearlab.store/wp-admin</code> into the address bar.</li>
+    <li>Enter your credentials and click <strong>Log In</strong>.</li>
+    <li>You will land on the WordPress Admin Dashboard. The dark left-hand navigation sidebar provides access to every tool described in this manual.</li>
+  </ol>
+</div>
+
+<div class="page-break"></div>
+
+<!-- PAGE 3: VISUAL HOMEPAGE EDITING -->
+<div class="page">
+  <h1 class="section-title"><span class="sec-num">02</span> Visual Homepage Editing (Live Customizer)</h1>
+  <p>Every single section on the WEARLAB homepage is connected to the visual WordPress Customizer. You can edit headlines, descriptions, button links, upload new lifestyle photography, and view real-time changes before publishing them live.</p>
+
+  <div class="callout callout-tip">
+    <div class="callout-title">HOW TO ACCESS THE VISUAL EDITOR</div>
+    In the left admin menu, navigate to <strong>Appearance &rarr; Customize</strong>. The left sidebar contains all WEARLAB controls, and the right window shows your live storefront. When finished making edits, click the blue <strong>Publish</strong> button at the top left.
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 25%;">Section Name</th>
+        <th style="width: 35%;">Customizable Elements</th>
+        <th style="width: 40%;">Recommended Content &amp; Specs</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Brand &amp; Announcement Bar</strong></td>
+        <td>
+          &bull; Ticker Enable / Disable<br>
+          &bull; Announcements 1, 2, 3<br>
+          &bull; Animation Speed
+        </td>
+        <td>
+          Default highlights nationwide shipping, limited drops, and 100% combed cotton authenticity. Keep messages punchy and uppercase.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Hero Banner</strong></td>
+        <td>
+          &bull; Main Headline<br>
+          &bull; Hero Image Upload<br>
+          &bull; Button Label &amp; Link
+        </td>
+        <td>
+          Upload high-res lifestyle hero shot (<code>1920x1080px</code> or <code>1600x1200px</code> portrait). Default text: <code>WEARLAB / 01</code>.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Featured Products</strong></td>
+        <td>
+          &bull; Overline Tag<br>
+          &bull; Section Heading<br>
+          &bull; Subtitle Description<br>
+          &bull; "View All" Button
+        </td>
+        <td>
+          Curated showcase displaying your active release pieces. Default tag: <code>CURATED STREETWEAR</code>, Title: <code>DROP 01 &mdash; ESSENTIALS</code>.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Shop by Fit (4 Visual Cards)</strong></td>
+        <td>
+          &bull; 4 Fit Card Titles<br>
+          &bull; 4 Price Badges<br>
+          &bull; 4 Destination Links<br>
+          &bull; 4 Image Uploaders
+        </td>
+        <td>
+          Upload portrait model shots (<code>800x1000px</code>). Fits include: <em>Oversized Hoodie</em>, <em>Boxy Fit Tee</em>, <em>Cargo Pants</em>, <em>Varsity Bomber</em>.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Brand Statement / Story</strong></td>
+        <td>
+          &bull; Overline Tag<br>
+          &bull; Main Headline<br>
+          &bull; Story Paragraph<br>
+          &bull; "Discover" Button
+        </td>
+        <td>
+          Communicates the minimalist brand philosophy: <em>"NOT JUST CLOTHING. AN ATTITUDE."</em> Links directly to your About page.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Collection Spotlight Banner</strong></td>
+        <td>
+          &bull; Overline &amp; Title<br>
+          &bull; Body Description<br>
+          &bull; Button Label &amp; Link<br>
+          &bull; Editorial Photo Upload
+        </td>
+        <td>
+          Highlights seasonal capsules (e.g. <em>Heavyweight Fleece Drop</em>, 420 GSM French terry). Ideal for driving sales to specific product lines.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Verified Customer Reviews</strong></td>
+        <td>
+          &bull; Section Title &amp; Overline<br>
+          &bull; 3 Review Author Names<br>
+          &bull; 3 Cities / Badges<br>
+          &bull; 3 Testimonial Quotes
+        </td>
+        <td>
+          Builds crucial buyer trust across Pakistan. Pre-configured with customer testimonials from Lahore, Karachi, and Islamabad.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Newsletter &amp; Final Call to Action</strong></td>
+        <td>
+          &bull; Newsletter Title &amp; Subtext<br>
+          &bull; Final Banner Headline<br>
+          &bull; Final Banner Button Link
+        </td>
+        <td>
+          Captures customer emails for drop notifications and drives immediate shopping action with high-contrast button styling.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Social Links &amp; WhatsApp Concierge</strong></td>
+        <td>
+          &bull; Instagram, TikTok, FB URLs<br>
+          &bull; WhatsApp Support Number<br>
+          &bull; Floating Widget Toggle
+        </td>
+        <td>
+          Enter your WhatsApp number (e.g. <code>+923001234567</code>). Controls the floating bottom-left chat bubble and all policy contact buttons.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Footer Settings</strong></td>
+        <td>
+          &bull; Country / Currency Text<br>
+          &bull; Copyright Notice
+        </td>
+        <td>
+          Default country: <code>PAKISTAN (PKR &#8360;)</code>. Year updates automatically.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- PAGE 4: EDITING WEBSITE PAGES & POLICIES -->
+<div class="page">
+  <h1 class="section-title"><span class="sec-num">03</span> Editing Website Pages &amp; Store Policies</h1>
+  <p>All core content pages and legal policies are pre-written according to modern Pakistani e-commerce standards and consumer protection guidelines. They feature the intelligent <strong>Smart Content Fallback Engine</strong>.</p>
+
+  <div class="callout callout-info">
+    <div class="callout-title">HOW SMART CONTENT FALLBACK WORKS</div>
+    <ul style="margin-left: 15px; margin-bottom: 0;">
+      <li><strong>Custom Content Entered:</strong> If you write custom text or add images in <strong>Pages &rarr; Edit</strong>, the page immediately displays your custom text while retaining the hero header and styled policy sidebar navigation.</li>
+      <li><strong>Editor Left Blank:</strong> If you clear the editor, the page automatically falls back to our professionally written default policy, complete with defect guarantees and WhatsApp concierge links.</li>
+    </ul>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 25%;">Policy</th>
+        <th style="width: 25%;">Direct URL</th>
+        <th style="width: 50%;">Core Rules &amp; Guidelines (Official Client Charter)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1. Shipping Policy</strong></td>
+        <td><code>/shipping-policy/</code></td>
+        <td>
+          &bull; <strong>Dispatch:</strong> 1&ndash;3 business days after confirmation.<br>
+          &bull; <strong>Delivery:</strong> 2&ndash;5 business days across Pakistan.<br>
+          &bull; <strong>Customized drops:</strong> Additional time for custom printing &amp; embroidery.<br>
+          &bull; <strong>Tracking:</strong> Tracking IDs sent via WhatsApp and SMS.<br>
+          &bull; <strong>Address:</strong> Customer responsibility for accuracy.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>2. Return &amp; Exchange</strong></td>
+        <td><code>/returns-policy/</code></td>
+        <td>
+          &bull; <strong>Window:</strong> 7 days from receiving the order.<br>
+          &bull; <strong>Eligibility:</strong> Damaged/defective pieces or wrong item/size sent.<br>
+          &bull; <strong>Condition:</strong> Unused, unwashed, tags &amp; packaging retained.<br>
+          &bull; <strong>Size swaps:</strong> Subject to stock; customer covers courier fee.<br>
+          &bull; <strong>Customized items:</strong> Non-returnable unless defective.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>3. Privacy Policy</strong></td>
+        <td><code>/privacy-policy/</code></td>
+        <td>
+          &bull; <strong>Data collected:</strong> Name, phone, email, address solely for orders.<br>
+          &bull; <strong>Protection:</strong> 256-bit SSL encrypted checkout.<br>
+          &bull; <strong>Sharing:</strong> WEARLAB never sells or rents customer data; shared only with delivery couriers &amp; payment processors.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>4. Terms &amp; Conditions</strong></td>
+        <td><code>/terms-conditions/</code></td>
+        <td>
+          &bull; <strong>Product info:</strong> High-accuracy descriptions &amp; photos (screen variations note).<br>
+          &bull; <strong>Pricing:</strong> Right to update prices &amp; drops without notice.<br>
+          &bull; <strong>Cancellations:</strong> Permitted before courier dispatch only.<br>
+          &bull; <strong>Availability:</strong> Replacements/refunds if piece runs out.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Master Policies Hub</strong></td>
+        <td><code>/policies/</code></td>
+        <td>
+          All 4 policies unified on a single master page with anchor jump tabs and official brand signature: <em>WEARLAB &bull; Designed in Pakistan &bull; wearlab.store</em>.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>How to Edit Any Page:</h2>
+  <ol>
+    <li>Navigate to <strong>Pages &rarr; All Pages</strong> in the WordPress dashboard.</li>
+    <li>Hover your cursor over the desired page and click <strong>Edit</strong>.</li>
+    <li>Type your content, add headings, or upload imagery in the editor.</li>
+    <li>Click the blue <strong>Update</strong> button at the top right to push your edits live.</li>
+  </ol>
+</div>
+
+<div class="page-break"></div>
+
+<!-- PAGE 5: PRODUCT CATALOG MANAGEMENT -->
+<div class="page">
+  <h1 class="section-title"><span class="sec-num">04</span> Product Catalog Management</h1>
+  <p>WEARLAB is tailored for streetwear fashion drops. Garments typically have multiple sizes (S, M, L, XL), gallery image sliders, and inventory management.</p>
+
+  <h2>Step-by-Step: Adding a New Streetwear Product</h2>
+  <div class="workflow-grid">
+    <div class="workflow-step">
+      <div class="wf-num">1</div>
+      <div class="wf-content">
+        <strong>Create Product Entry</strong>
+        <span>Go to <strong>Products &rarr; Add New</strong>. Enter the product title (e.g. <em>"Heavyweight Oversized Boxy Tee &mdash; Off Black"</em>) and write the fabric composition (e.g. <em>100% 280 GSM Combed Cotton</em>).</span>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="wf-num">2</div>
+      <div class="wf-content">
+        <strong>Upload Primary Photo &amp; Gallery Slider</strong>
+        <span>In the right sidebar, click <strong>Set product image</strong> for the primary front view. Then click <strong>Add product gallery images</strong> to select back view, side fit, and fabric close-up photos. The theme automatically arranges these into an interactive swipeable slider.</span>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="wf-num">3</div>
+      <div class="wf-content">
+        <strong>Configure Variable Sizes (S, M, L, XL)</strong>
+        <span>Under <strong>Product Data</strong> (below description), change dropdown from <em>Simple product</em> to <strong>Variable product</strong>. Click <strong>Attributes &rarr; Add</strong>: Name: <code>Size</code> | Values: <code>S | M | L | XL</code>. Check <em>"Used for variations"</em> and click <strong>Save attributes</strong>.</span>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="wf-num">4</div>
+      <div class="wf-content">
+        <strong>Set Prices &amp; Stock for Each Size</strong>
+        <span>Click the <strong>Variations</strong> tab &rarr; <strong>Generate variations</strong>. 4 size cards will appear. Enter the price (e.g. <code>3490</code>) and set stock status to <em>In stock</em> for each size.</span>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="wf-num">5</div>
+      <div class="wf-content">
+        <strong>Publish Product</strong>
+        <span>Select the category (e.g. <em>T-Shirts</em>) in the right panel and click the blue <strong>Publish</strong> button. The piece is immediately live on your store.</span>
+      </div>
+    </div>
+  </div>
+
+  <h2>Sale Discounts &amp; Badges</h2>
+  <p>To put an item on sale, enter a <strong>Sale Price (PKR)</strong> alongside the Regular Price. The theme automatically displays a stylish <code>SALE</code> badge on the product card and strikes through the old price.</p>
+</div>
+
+<div class="page-break"></div>
+
+<!-- PAGE 6: ORDER FULFILLMENT & CASH ON DELIVERY (COD) -->
+<div class="page">
+  <h1 class="section-title"><span class="sec-num">05</span> Order Management &amp; Cash on Delivery (COD) Protocol</h1>
+  <p>Cash on Delivery (COD) is the primary payment model for Pakistani e-commerce. To maintain high fulfillment rates and minimize Return-to-Origin (RTO) courier costs, follow this standardized order protocol:</p>
+
+  <div class="workflow-grid">
+    <div class="workflow-step">
+      <div class="wf-num">1</div>
+      <div class="wf-content">
+        <strong>New Order Received (Status: Processing)</strong>
+        <span>Customer places order on <code>wearlab.store</code>. Both customer and store receive instant order confirmation emails. Order appears under <strong>WooCommerce &rarr; Orders</strong>.</span>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="wf-num">2</div>
+      <div class="wf-content">
+        <strong>Customer Address &amp; Size Verification Call / WhatsApp</strong>
+        <span>Before packing, contact the customer on WhatsApp or phone: <em>"Assalam-o-Alaikum [Name], this is WEARLAB confirming your order #75 for [Product Name], Size [M], Total PKR 3,490 to [Delivery Address]..."</em></span>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="wf-num">3</div>
+      <div class="wf-content">
+        <strong>Packaging &amp; Courier Portal Booking</strong>
+        <span>Inspect garment, pack in WEARLAB branded poly mailer. Log into your courier portal (<strong>PostEx, Trax, Leopard, or TCS</strong>), generate courier consignment note (CN), and affix airway bill.</span>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="wf-num">4</div>
+      <div class="wf-content">
+        <strong>Update Order Status to "Completed"</strong>
+        <span>In WP Admin, open the order and change status to <strong>Completed</strong>. Add courier tracking number into customer order notes so the customer is notified.</span>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="wf-num">5</div>
+      <div class="wf-content">
+        <strong>Doorstep Cash Collection</strong>
+        <span>Courier rider delivers parcel and collects exact cash in PKR. Courier deposits COD funds into your business bank account within 24&ndash;48 hours.</span>
+      </div>
+    </div>
+  </div>
+
+  <h2>Order Status Definitions:</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 25%;">Status</th>
+        <th style="width: 75%;">When to Use</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Processing</strong></td>
+        <td>Default status when a COD order is placed. Awaiting phone verification and dispatch.</td>
+      </tr>
+      <tr>
+        <td><strong>On Hold</strong></td>
+        <td>Use if customer phone is switched off or address details are incomplete.</td>
+      </tr>
+      <tr>
+        <td><strong>Completed</strong></td>
+        <td>Parcel packaged, airway bill booked, and package handed over to courier.</td>
+      </tr>
+      <tr>
+        <td><strong>Cancelled</strong></td>
+        <td>Customer requested cancellation prior to courier handoff.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- PAGE 7: EMAIL SETUP & MENUS -->
+<div class="page">
+  <h1 class="section-title"><span class="sec-num">06</span> Customer Order Confirmation Emails (Hostinger SMTP)</h1>
+  <p>To ensure that order confirmation emails reach customers' <strong>Inboxes</strong> directly (and are never flagged as Spam by Gmail/Yahoo), your store connects to your official Hostinger Titan Mail server via <strong>WP Mail SMTP</strong>.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 35%;">Configuration Field</th>
+        <th style="width: 65%;">Required Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>From Name</strong></td>
+        <td><code>WEARLAB</code> (Check <em>Force From Name</em>)</td>
+      </tr>
+      <tr>
+        <td><strong>From Email</strong></td>
+        <td><code>orders@wearlab.store</code> (Check <em>Force From Email</em>)</td>
+      </tr>
+      <tr>
+        <td><strong>Mailer Type</strong></td>
+        <td>Select <strong>Other SMTP</strong></td>
+      </tr>
+      <tr>
+        <td><strong>SMTP Host</strong></td>
+        <td><code>smtp.hostinger.com</code></td>
+      </tr>
+      <tr>
+        <td><strong>Encryption</strong></td>
+        <td><code>SSL</code></td>
+      </tr>
+      <tr>
+        <td><strong>SMTP Port</strong></td>
+        <td><code>465</code></td>
+      </tr>
+      <tr>
+        <td><strong>Auto TLS / Authentication</strong></td>
+        <td>Both set to <strong>ON</strong></td>
+      </tr>
+      <tr>
+        <td><strong>SMTP Username</strong></td>
+        <td><code>orders@wearlab.store</code></td>
+      </tr>
+      <tr>
+        <td><strong>SMTP Password</strong></td>
+        <td>Your Hostinger Titan Email password</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-tip">
+    <div class="callout-title">TESTING EMAIL DELIVERY</div>
+    After saving settings, click the <strong>Email Test</strong> tab at the top of WP Mail SMTP. Enter your personal Gmail address and click <strong>Send Email</strong>. You will receive an immediate confirmation email from <code>WEARLAB &lt;orders@wearlab.store&gt;</code>.
+  </div>
+
+  <h1 class="section-title" style="margin-top: 30px;"><span class="sec-num">07</span> Navigation Menus &amp; Footer Links Configuration</h1>
+  <p>Manage all website menus easily under <strong>Appearance &rarr; Menus</strong>:</p>
+  <ul>
+    <li><strong>Primary Navigation:</strong> Controls the top header navigation (Shop, New Arrivals, About, Contact). Drag and drop pages to rearrange; indent an item slightly to create a sub-menu dropdown.</li>
+    <li><strong>Footer Shop Menu:</strong> Links to key product collections (T-Shirts, Hoodies, Best Sellers).</li>
+    <li><strong>Footer Support Menu:</strong> Customer service links (FAQ, Contact Us, Track Order).</li>
+    <li><strong>Footer Legal Menu:</strong> Legal compliance links (Exchange &amp; Returns, Shipping, Payment, Privacy, Terms).</li>
+  </ul>
+</div>
+
+<div class="page-break"></div>
+
+<!-- PAGE 8: LOGO, COUPONS & LAUNCH CHECKLIST -->
+<div class="page">
+  <h1 class="section-title"><span class="sec-num">08</span> Logo, Favicon &amp; Brand Identity Maintenance</h1>
+  <p>To update brand visuals, navigate to <strong>Appearance &rarr; Customize &rarr; Site Identity</strong>:</p>
+  <ul>
+    <li><strong>Main Logo:</strong> Upload your primary horizontal WEARLAB logo (transparent PNG or SVG recommended, width between <code>180px</code> and <code>260px</code>).</li>
+    <li><strong>Site Icon (Favicon):</strong> Upload a square <code>512x512px</code> icon. This appears in browser tabs, mobile bookmarks, and search snippets.</li>
+  </ul>
+
+  <h1 class="section-title" style="margin-top: 24px;"><span class="sec-num">09</span> Discount Coupons &amp; Promotional Campaigns</h1>
+  <p>Create discount codes for influencer drops, seasonal sales, or promotional campaigns:</p>
+  <ol>
+    <li>Go to <strong>Marketing &rarr; Coupons &rarr; Add coupon</strong> in the left sidebar.</li>
+    <li>Enter the coupon code (e.g. <code>DROP10</code> or <code>FIRST500</code>).</li>
+    <li>Choose <strong>Discount type</strong>: <em>Percentage discount</em> (e.g. 10%) or <em>Fixed cart discount</em> (e.g. PKR 500).</li>
+    <li>Under <strong>Usage restriction</strong>: (Optional) Set a minimum spend (e.g. PKR 5,000) or exclude sale items.</li>
+    <li>Click <strong>Publish</strong>. Customers can apply this code at checkout for instant price deduction.</li>
+  </ol>
+
+  <h1 class="section-title" style="margin-top: 24px;"><span class="sec-num">10</span> Store Launch &amp; Daily Operations Checklist</h1>
+  <p>Before launching marketing campaigns, complete this final readiness checklist:</p>
+
+  <ul class="checklist">
+    <li><span class="checkbox"></span> <strong>Upload Real 5 Products:</strong> Add actual streetwear inventory with sizes S, M, L, XL and PKR pricing.</li>
+    <li><span class="checkbox"></span> <strong>Upload High-Resolution Imagery:</strong> Ensure front, back, and lifestyle model shots are attached to each product.</li>
+    <li><span class="checkbox"></span> <strong>Connect WhatsApp Concierge:</strong> Enter your active WhatsApp Business number in Appearance &rarr; Customize.</li>
+    <li><span class="checkbox"></span> <strong>Verify Hostinger SMTP:</strong> Send a test email from WP Mail SMTP to confirm instant inbox delivery.</li>
+    <li><span class="checkbox"></span> <strong>Connect Courier COD Account:</strong> Set up API or merchant portal with PostEx, Trax, or Leopard Courier.</li>
+    <li><span class="checkbox"></span> <strong>Install Meta Pixel / TikTok Tag:</strong> Install <em>PixelYourSite</em> plugin for Facebook &amp; TikTok conversion tracking.</li>
+    <li><span class="checkbox"></span> <strong>Upload Favicon:</strong> Upload square 512x512 brand icon in Appearance &rarr; Customize &rarr; Site Identity.</li>
+    <li><span class="checkbox"></span> <strong>Test Place a Live Order:</strong> Order 1 test item on <code>wearlab.store</code> using COD, verify email receipt and WhatsApp flow.</li>
+  </ul>
+
+  <div class="footer-note">
+    WEARLAB E-Commerce Handover Manual &bull; Compiled for wearlab.store &bull; Theme Engine v1.5.1
+  </div>
+</div>
+
+</body>
+</html>

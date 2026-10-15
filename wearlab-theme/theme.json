@@ -1,0 +1,46 @@
+{
+	"version": 2,
+	"settings": {
+		"color": {
+			"palette": [
+				{ "slug": "black", "color": "#111111", "name": "Black" },
+				{ "slug": "dark", "color": "#1A1A1A", "name": "Dark" },
+				{ "slug": "white", "color": "#FFFFFF", "name": "White" },
+				{ "slug": "off-white", "color": "#F5F5F5", "name": "Off White" },
+				{ "slug": "light-bg", "color": "#FAFAFA", "name": "Light BG" },
+				{ "slug": "gray", "color": "#888888", "name": "Gray" },
+				{ "slug": "light-gray", "color": "#E5E5E5", "name": "Light Gray" },
+				{ "slug": "medium-gray", "color": "#666666", "name": "Medium Gray" },
+				{ "slug": "error", "color": "#D32F2F", "name": "Error" },
+				{ "slug": "success", "color": "#2E7D32", "name": "Success" }
+			],
+			"custom": false,
+			"customGradient": false,
+			"defaultPalette": false,
+			"defaultGradients": false
+		},
+		"typography": {
+			"fontSizes": [
+				{ "slug": "caption", "size": "12px", "name": "Caption" },
+				{ "slug": "body-sm", "size": "14px", "name": "Body Small" },
+				{ "slug": "body", "size": "16px", "name": "Body" },
+				{ "slug": "body-lg", "size": "18px", "name": "Body Large" },
+				{ "slug": "h4", "size": "20px", "name": "H4" },
+				{ "slug": "h3", "size": "24px", "name": "H3" },
+				{ "slug": "h2", "size": "32px", "name": "H2" },
+				{ "slug": "h1", "size": "42px", "name": "H1" },
+				{ "slug": "display", "size": "56px", "name": "Display" }
+			],
+			"customFontSize": false,
+			"dropCap": false
+		},
+		"layout": {
+			"contentSize": "1200px",
+			"wideSize": "1400px"
+		},
+		"spacing": {
+			"customPadding": false,
+			"customMargin": false
+		}
+	}
+}

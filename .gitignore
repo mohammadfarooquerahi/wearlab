@@ -1,0 +1,12 @@
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Intermediate build archives (keep wearlab.zip as main distribution)
+wearlab-theme-v*.zip
+
+# Logs & temp files
+*.log
+.vscode/
+.idea/
