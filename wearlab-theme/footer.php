@@ -147,6 +147,30 @@ if ( $wa_enabled && ! empty( $wa_num_clean ) ) :
 </a>
 <?php endif; ?>
 
+<!-- Preloader Dismiss Script (Fade out once DOM and assets load) -->
+<script id="wl-preloader-dismiss-script">
+(function() {
+    function dismissWlPreloader() {
+        var loader = document.getElementById('wl-preloader');
+        if (loader && !loader.classList.contains('is-loaded')) {
+            loader.classList.add('is-loaded');
+            setTimeout(function() {
+                if (loader && loader.parentNode) {
+                    loader.parentNode.removeChild(loader);
+                }
+            }, 450);
+        }
+    }
+    if (document.readyState === 'complete') {
+        dismissWlPreloader();
+    } else {
+        window.addEventListener('load', dismissWlPreloader);
+    }
+    // Safety fail-safe: dismiss after 2.8s even on slow 3G network
+    setTimeout(dismissWlPreloader, 2800);
+})();
+</script>
+
 <?php wp_footer(); ?>
 </body>
 </html>

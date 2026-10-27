@@ -224,20 +224,33 @@ function wearlab_policy_page_redirect_fallback() {
 	}
 }
 
-// Enqueue Scripts & Styles
+// Enqueue Scripts & Styles (High Performance & Cache-Busting)
 function wearlab_enqueue() {
-	wp_enqueue_style( 'wearlab-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap', array(), null );
-	wp_enqueue_style( 'wearlab-style', get_stylesheet_uri(), array(), wp_get_theme()->get('Version') );
+	$theme_ver   = wp_get_theme()->get( 'Version' );
+	$style_path  = get_stylesheet_directory() . '/style.css';
+	$style_ver   = file_exists( $style_path ) ? filemtime( $style_path ) : $theme_ver;
+	$js_path     = get_template_directory() . '/assets/js/main.js';
+	$js_ver      = file_exists( $js_path ) ? filemtime( $js_path ) : $theme_ver;
 
-	wp_enqueue_script( 'wearlab-main', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), wp_get_theme()->get('Version'), true );
+	// Google Fonts with font-display:swap
+	wp_enqueue_style( 'wearlab-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap', array(), null );
+
+	// Main Theme Stylesheet with automatic filemtime cache-busting
+	wp_enqueue_style( 'wearlab-style', get_stylesheet_uri(), array(), $style_ver );
+
+	// Main Theme Script (Deferred for maximum speed)
+	wp_enqueue_script( 'wearlab-main', get_template_directory_uri() . '/assets/js/main.js', array( 'jquery' ), $js_ver, true );
 	wp_script_add_data( 'wearlab-main', 'defer', true );
 
 	if ( class_exists( 'WooCommerce' ) && ( is_woocommerce() || is_cart() || is_checkout() || is_account_page() ) ) {
-		wp_enqueue_script( 'wearlab-woocommerce', get_template_directory_uri() . '/assets/js/woocommerce.js', array('jquery'), wp_get_theme()->get('Version'), true );
+		$wc_js_path = get_template_directory() . '/assets/js/woocommerce.js';
+		$wc_js_ver  = file_exists( $wc_js_path ) ? filemtime( $wc_js_path ) : $theme_ver;
+		wp_enqueue_script( 'wearlab-woocommerce', get_template_directory_uri() . '/assets/js/woocommerce.js', array( 'jquery' ), $wc_js_ver, true );
+		wp_script_add_data( 'wearlab-woocommerce', 'defer', true );
 	}
 	
 	wp_localize_script( 'wearlab-main', 'wearlab_ajax', array(
-		'url' => admin_url( 'admin-ajax.php' ),
+		'url'   => admin_url( 'admin-ajax.php' ),
 		'nonce' => wp_create_nonce( 'wearlab_nonce' )
 	) );
 }
@@ -246,11 +259,41 @@ add_action( 'wp_enqueue_scripts', 'wearlab_enqueue' );
 // Disable block editor for pages
 add_filter( 'use_block_editor_for_post', '__return_false', 10 );
 
-// Security
+// Security & Header Hardening
+add_action( 'send_headers', 'wearlab_security_headers' );
+function wearlab_security_headers() {
+	if ( ! is_admin() ) {
+		header( 'X-Content-Type-Options: nosniff' );
+		header( 'X-Frame-Options: SAMEORIGIN' );
+		header( 'X-XSS-Protection: 1; mode=block' );
+		header( 'Referrer-Policy: strict-origin-when-cross-origin' );
+	}
+}
+
+// Clean head tags for speed & security
 remove_action( 'wp_head', 'wp_generator' );
-add_filter( 'xmlrpc_enabled', '__return_false' );
+remove_action( 'wp_head', 'rsd_link' );
+remove_action( 'wp_head', 'wlwmanifest_link' );
+remove_action( 'wp_head', 'wp_shortlink_wp_head' );
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 remove_action( 'wp_print_styles', 'print_emoji_styles' );
+add_filter( 'xmlrpc_enabled', '__return_false' );
+
+// Remove X-Pingback header
+add_filter( 'wp_headers', 'wearlab_remove_x_pingback' );
+function wearlab_remove_x_pingback( $headers ) {
+	unset( $headers['X-Pingback'] );
+	return $headers;
+}
+
+// Block Author Enumeration Scans
+add_action( 'template_redirect', 'wearlab_block_author_enumeration' );
+function wearlab_block_author_enumeration() {
+	if ( ! is_admin() && isset( $_REQUEST['author'] ) && is_numeric( $_REQUEST['author'] ) ) {
+		wp_safe_redirect( home_url( '/' ), 301 );
+		exit;
+	}
+}
 
 // Widgets
 function wearlab_widgets_init() {

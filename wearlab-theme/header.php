@@ -2,11 +2,138 @@
 <html <?php language_attributes(); ?>>
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!-- Preconnect to external resource domains for instant loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+    <?php
+    if ( is_front_page() || is_home() ) :
+        $custom_hero = get_theme_mod( 'wearlab_hero_image', '' );
+        $hero_preload_url = ! empty( $custom_hero ) ? $custom_hero : get_template_directory_uri() . '/assets/images/hero-banner.jpg';
+    ?>
+    <!-- Preload Hero Banner for fast LCP -->
+    <link rel="preload" as="image" href="<?php echo esc_url( $hero_preload_url ); ?>" fetchpriority="high">
+    <?php endif; ?>
+
+    <!-- Critical Brand Preloader Styles (Zero FOUC on slow networks) -->
+    <style id="wl-preloader-critical">
+        #wl-preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #ffffff;
+            z-index: 99999999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: auto;
+        }
+        #wl-preloader.is-loaded {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .wl-preloader__brand {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .wl-preloader__logo-text {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: 0.22em;
+            color: #111111;
+            text-transform: uppercase;
+            animation: wlPreloadPulse 1.6s ease-in-out infinite;
+        }
+        .wl-preloader__logo-img {
+            max-width: 150px;
+            max-height: 52px;
+            height: auto;
+            width: auto;
+            object-fit: contain;
+            animation: wlPreloadPulse 1.6s ease-in-out infinite;
+        }
+        .wl-preloader__track {
+            width: 52px;
+            height: 2px;
+            background: #f0f0f0;
+            border-radius: 2px;
+            margin-top: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+        .wl-preloader__bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: #111111;
+            transform: translateX(-100%);
+            animation: wlPreloadSlide 1.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+        }
+        .wl-preloader__caption {
+            margin-top: 10px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: #888888;
+        }
+        @keyframes wlPreloadPulse {
+            0%, 100% { opacity: 0.45; transform: scale(0.98); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes wlPreloadSlide {
+            0% { transform: translateX(-100%); }
+            50% { transform: translateX(0); }
+            100% { transform: translateX(100%); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .wl-preloader__logo-text, .wl-preloader__logo-img, .wl-preloader__bar {
+                animation: none;
+            }
+        }
+    </style>
+    <noscript>
+        <style>#wl-preloader { display: none !important; }</style>
+    </noscript>
+
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
+
+<!-- Brand Preloader (Guarantees zero unstyled HTML on slow internet) -->
+<div id="wl-preloader" aria-hidden="true">
+    <div class="wl-preloader__brand">
+        <?php
+        $custom_logo_id = get_theme_mod( 'custom_logo' );
+        $logo_data = $custom_logo_id ? wp_get_attachment_image_src( $custom_logo_id, 'medium' ) : false;
+        if ( $logo_data ) :
+        ?>
+            <img src="<?php echo esc_url( $logo_data[0] ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="wl-preloader__logo-img">
+        <?php else : ?>
+            <span class="wl-preloader__logo-text">WEARLAB</span>
+        <?php endif; ?>
+        <div class="wl-preloader__track">
+            <div class="wl-preloader__bar"></div>
+        </div>
+        <span class="wl-preloader__caption">Modern Streetwear</span>
+    </div>
+</div>
 
 <?php if ( get_theme_mod( 'wearlab_announcement_enable', true ) ) : ?>
 <!-- Top Announcement / Marquee Bar like KhushPosh -->
