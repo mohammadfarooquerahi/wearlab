@@ -79,7 +79,18 @@ function wl_shop_filter_url( $add = array(), $remove = array() ) {
 					Filter
 				</button>
 				<div class="wl-shop-toolbar__count">
-					<?php woocommerce_result_count(); ?>
+					<?php
+					if ( function_exists( 'woocommerce_result_count' ) && ! is_page() && is_shop() ) {
+						woocommerce_result_count();
+					} else {
+						$total_products_count = (int) ( wp_count_posts( 'product' )->publish ?? 0 );
+						if ( $total_products_count > 0 ) {
+							printf( esc_html__( 'Showing all %d products', 'wearlab' ), $total_products_count );
+						} else {
+							esc_html_e( 'Showing products', 'wearlab' );
+						}
+					}
+					?>
 				</div>
 			</div>
 			<div class="wl-shop-toolbar__right">
@@ -240,21 +251,24 @@ function wl_shop_filter_url( $add = array(), $remove = array() ) {
 			<!-- Product Grid -->
 			<div class="wl-shop-products">
 				<?php
-				$rendered = false;
-				if ( woocommerce_product_loop() && have_posts() ) {
+				$rendered_count = 0;
+				// Only use the global query loop if this is a native product archive and not a static page
+				if ( woocommerce_product_loop() && have_posts() && ! is_page() ) {
 					woocommerce_product_loop_start();
 					while ( have_posts() ) {
 						the_post();
-						do_action( 'woocommerce_shop_loop' );
-						wc_get_template_part( 'content', 'product' );
-						$rendered = true;
+						if ( get_post_type() === 'product' ) {
+							do_action( 'woocommerce_shop_loop' );
+							wc_get_template_part( 'content', 'product' );
+							$rendered_count++;
+						}
 					}
 					woocommerce_product_loop_end();
 					do_action( 'woocommerce_after_shop_loop' );
 				}
 
-				if ( ! $rendered ) {
-					// Direct query fallback for robustness across all WooCommerce configs & live environments
+				if ( 0 === $rendered_count ) {
+					// Direct query fallback: guarantees all products show on /shop/, page templates, or any configuration
 					$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 					$shop_args = array(
 						'post_type'      => 'product',
@@ -311,6 +325,7 @@ function wl_shop_filter_url( $add = array(), $remove = array() ) {
 								break;
 						}
 					}
+
 					// Apply size filter
 					if ( ! empty( $_GET['filter_size'] ) ) {
 						if ( ! isset( $shop_args['tax_query'] ) ) $shop_args['tax_query'] = array();
@@ -318,6 +333,43 @@ function wl_shop_filter_url( $add = array(), $remove = array() ) {
 							'taxonomy' => 'pa_size',
 							'field'    => 'slug',
 							'terms'    => sanitize_text_field( $_GET['filter_size'] ),
+						);
+					}
+
+					// Apply price filter
+					if ( $active_min_price !== '' || $active_max_price !== '' ) {
+						if ( ! isset( $shop_args['meta_query'] ) ) $shop_args['meta_query'] = array();
+						if ( $active_min_price !== '' && $active_max_price !== '' ) {
+							$shop_args['meta_query'][] = array(
+								'key'     => '_price',
+								'value'   => array( $active_min_price, $active_max_price ),
+								'type'    => 'NUMERIC',
+								'compare' => 'BETWEEN',
+							);
+						} elseif ( $active_min_price !== '' ) {
+							$shop_args['meta_query'][] = array(
+								'key'     => '_price',
+								'value'   => $active_min_price,
+								'type'    => 'NUMERIC',
+								'compare' => '>=',
+							);
+						} elseif ( $active_max_price !== '' ) {
+							$shop_args['meta_query'][] = array(
+								'key'     => '_price',
+								'value'   => $active_max_price,
+								'type'    => 'NUMERIC',
+								'compare' => '<=',
+							);
+						}
+					}
+
+					// Apply stock filter
+					if ( ! empty( $_GET['stock_status'] ) && 'instock' === $_GET['stock_status'] ) {
+						if ( ! isset( $shop_args['meta_query'] ) ) $shop_args['meta_query'] = array();
+						$shop_args['meta_query'][] = array(
+							'key'     => '_stock_status',
+							'value'   => 'instock',
+							'compare' => '=',
 						);
 					}
 
@@ -329,6 +381,22 @@ function wl_shop_filter_url( $add = array(), $remove = array() ) {
 							wc_get_template_part( 'content', 'product' );
 						}
 						echo '</ul>';
+
+						// Pagination
+						$total_pages = $fallback_loop->max_num_pages;
+						if ( $total_pages > 1 ) {
+							echo '<nav class="woocommerce-pagination"><ul class="page-numbers">';
+							echo paginate_links( array(
+								'base'      => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
+								'format'    => '?paged=%#%',
+								'current'   => max( 1, $paged ),
+								'total'     => $total_pages,
+								'type'      => 'list',
+								'prev_text' => '&larr;',
+								'next_text' => '&rarr;',
+							) );
+							echo '</ul></nav>';
+						}
 						wp_reset_postdata();
 					} else {
 						?>

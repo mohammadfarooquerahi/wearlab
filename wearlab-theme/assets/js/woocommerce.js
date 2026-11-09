@@ -84,15 +84,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Archive page AJAX add to cart toast notification
+    // Archive page AJAX add to cart toast notification & drawer open
     document.querySelectorAll('.ajax_add_to_cart').forEach(btn => {
         btn.addEventListener('click', function(e) {
-            // standard wooCommerce handles this, but we can hook into it to show toast
             const observer = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
                     if (mutation.attributeName === 'class') {
                         if (btn.classList.contains('added')) {
                             showToast('Added to cart successfully!');
+                            if (typeof window.wlOpenCartDrawer === 'function') {
+                                window.wlOpenCartDrawer();
+                            }
                             observer.disconnect();
                         }
                     }

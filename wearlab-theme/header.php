@@ -33,8 +33,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            pointer-events: auto;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+            pointer-events: none;
         }
         #wl-preloader.is-loaded {
             opacity: 0;
@@ -134,6 +134,20 @@
         <span class="wl-preloader__caption">Modern Streetwear</span>
     </div>
 </div>
+<script>
+(function(){
+    var p = document.getElementById('wl-preloader');
+    if (p) {
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            p.classList.add('is-loaded');
+        } else {
+            document.addEventListener('DOMContentLoaded', function(){ p.classList.add('is-loaded'); });
+            window.addEventListener('load', function(){ p.classList.add('is-loaded'); });
+            setTimeout(function(){ p.classList.add('is-loaded'); }, 600);
+        }
+    }
+})();
+</script>
 
 <?php if ( get_theme_mod( 'wearlab_announcement_enable', true ) ) : ?>
 <!-- Top Announcement / Marquee Bar like KhushPosh -->

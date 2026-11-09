@@ -633,14 +633,37 @@ document.addEventListener('DOMContentLoaded', function() {
     window.wlOpenCartDrawer = openCartDrawer;
     window.wlCloseCartDrawer = closeCartDrawer;
 
-    // Header cart trigger
-    const headerCartBtn = document.querySelector('.wl-header__cart');
-    if (headerCartBtn) {
-        headerCartBtn.addEventListener('click', (e) => {
+    // Cart trigger buttons (Header, Sticky, Mobile, and any cart toggles)
+    document.querySelectorAll('.wl-header__cart, .wl-cart-toggle, [data-open-cart]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
             e.preventDefault();
             openCartDrawer();
         });
+    });
+
+    // Listen to WooCommerce added_to_cart event across document
+    if (typeof jQuery !== 'undefined') {
+        jQuery(document.body).on('added_to_cart', function(event, fragments, cart_hash, $button) {
+            openCartDrawer();
+            if (fragments) {
+                const miniHtml = fragments['div#wlCartDrawerContent'] || fragments['div.widget_shopping_cart_content'] || fragments['.wl-cart-drawer__content'];
+                if (miniHtml) {
+                    const drawerContent = document.getElementById('wlCartDrawerContent');
+                    if (drawerContent) drawerContent.innerHTML = miniHtml;
+                }
+            }
+        });
     }
+
+    // Direct listener for all archive / catalog Add To Cart buttons
+    document.addEventListener('click', function(e) {
+        const atcBtn = e.target.closest('.add_to_cart_button, .ajax_add_to_cart, .wl-product-card__atc');
+        if (atcBtn) {
+            setTimeout(function() {
+                openCartDrawer();
+            }, 600);
+        }
+    });
 
     // Close triggers
     document.querySelectorAll('[data-close-cart]').forEach(btn => {
@@ -672,6 +695,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 const formData = new FormData(pdpForm);
                 formData.append('action', 'wearlab_add_to_cart');
                 formData.append('buy_now', '1');
+                const atcBtn = pdpForm.querySelector('.wl-pdp__atc');
+                const pid = atcBtn ? atcBtn.value : pdpForm.querySelector('input[name="product_id"]')?.value;
+                if (pid && !formData.get('product_id')) {
+                    formData.append('product_id', pid);
+                }
+                if (pid && !formData.get('add-to-cart')) {
+                    formData.append('add-to-cart', pid);
+                }
                 if (window.wearlab_ajax && window.wearlab_ajax.nonce) {
                     formData.append('nonce', window.wearlab_ajax.nonce);
                 }
@@ -692,10 +723,10 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Add to Cart submit
-        pdpForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const atcBtn = this.querySelector('.wl-pdp__atc');
+        // Add to Cart submit & click
+        const atcSubmitHandler = function(e) {
+            if (e) e.preventDefault();
+            const atcBtn = pdpForm.querySelector('.wl-pdp__atc');
             if (atcBtn) {
                 atcBtn.classList.add('is-loading');
             }
@@ -704,6 +735,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const formData = new FormData(pdpForm);
             formData.append('action', 'wearlab_add_to_cart');
+            const pid = atcBtn ? atcBtn.value : pdpForm.querySelector('input[name="product_id"]')?.value;
+            if (pid && !formData.get('product_id')) {
+                formData.append('product_id', pid);
+            }
+            if (pid && !formData.get('add-to-cart')) {
+                formData.append('add-to-cart', pid);
+            }
             if (window.wearlab_ajax && window.wearlab_ajax.nonce) {
                 formData.append('nonce', window.wearlab_ajax.nonce);
             }
@@ -717,23 +755,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (atcBtn) atcBtn.classList.remove('is-loading');
                 if (data.success) {
                     if (data.data && data.data.count !== undefined) {
-                        const countEl = document.querySelector('.wl-cart-count');
-                        if (countEl) countEl.textContent = data.data.count;
+                        document.querySelectorAll('.wl-cart-count').forEach(el => el.textContent = data.data.count);
                     }
                     if (data.data && data.data.html) {
                         const drawerContent = document.getElementById('wlCartDrawerContent');
                         if (drawerContent) drawerContent.innerHTML = data.data.html;
                     }
-                    openCartDrawer();
-                } else {
-                    openCartDrawer();
                 }
+                openCartDrawer();
             })
             .catch(() => {
                 if (atcBtn) atcBtn.classList.remove('is-loading');
                 openCartDrawer();
             });
-        });
+        };
+
+        pdpForm.addEventListener('submit', atcSubmitHandler);
+        const atcBtn = pdpForm.querySelector('.wl-pdp__atc');
+        if (atcBtn) {
+            atcBtn.addEventListener('click', function(e) {
+                // If form isn't handled by submit
+                if (pdpForm.classList.contains('variations_form')) {
+                    // let submit handler handle it
+                } else {
+                    atcSubmitHandler(e);
+                }
+            });
+        }
     }
 
     // Cart Drawer Qty Change & Item Removal (event delegation)

@@ -13,10 +13,32 @@ if ( ! isset( $order ) || ! $order ) {
 	if ( ! $order_id && isset( $_GET['order_id'] ) ) {
 		$order_id = absint( $_GET['order_id'] );
 	}
+	if ( ! $order_id && preg_match( '#order-received[=/](\d+)#i', $_SERVER['REQUEST_URI'] ?? '', $m ) ) {
+		$order_id = absint( $m[1] );
+	}
 	if ( $order_id ) {
 		$order = wc_get_order( $order_id );
 	}
 }
+
+// Build WhatsApp instant confirmation link
+$wa_num       = get_theme_mod( 'wearlab_social_whatsapp', '923001234567' );
+$wa_num_clean = preg_replace( '/[^0-9]/', '', $wa_num );
+$customer_name = $order ? trim( $order->get_formatted_billing_full_name() ) : '';
+$order_items_text = array();
+if ( $order ) {
+	foreach ( $order->get_items() as $item ) {
+		$order_items_text[] = $item->get_name() . ' x' . $item->get_quantity();
+	}
+}
+$wa_order_msg = sprintf(
+	"Hi WEARLAB! I just placed Order #%s on wearlab.store.\nCustomer: %s\nTotal: %s (COD)\nItems: %s\nPlease confirm and dispatch my order. Thank you!",
+	$order ? $order->get_order_number() : '',
+	$customer_name,
+	$order ? strip_tags( $order->get_formatted_order_total() ) : '',
+	implode( ', ', $order_items_text )
+);
+$wa_order_url = ! empty( $wa_num_clean ) ? 'https://wa.me/' . $wa_num_clean . '?text=' . rawurlencode( $wa_order_msg ) : '#';
 
 get_header();
 ?>
@@ -86,10 +108,26 @@ get_header();
                             </span>
                         </div>
                         <div class="wl-order-highlight-item">
-                            <span class="wl-order-highlight-label">Shipping</span>
-                            <span class="wl-order-highlight-value wl-order-highlight-value--free">FREE Dispatch (Across Pakistan)</span>
+                            <span class="wl-order-highlight-label">Delivery Charges</span>
+                            <span class="wl-order-highlight-value">Rs. 350 (Nationwide Courier)</span>
                         </div>
                     </div>
+
+                    <?php if ( ! empty( $wa_num_clean ) ) : ?>
+                    <!-- WhatsApp Instant Confirmation Box -->
+                    <div class="wl-wa-confirm-banner" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; background-color: #f0faf4; border: 1.5px solid #25D366; border-radius: 8px; padding: 16px 20px; margin-bottom: 24px; flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 14px;">
+                            <svg width="34" height="34" viewBox="0 0 24 24" fill="#25D366" style="flex-shrink: 0;"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.78 14.07c-.24.68-1.22 1.26-1.83 1.33-.56.07-1.29.1-3.69-.89-3.08-1.26-5.06-4.39-5.21-4.6-.15-.2-1.24-1.65-1.24-3.15 0-1.5.78-2.24 1.06-2.54.28-.3.62-.37.82-.37.21 0 .42 0 .6.01.19.01.45-.07.7.54.26.63.89 2.16.97 2.32.08.16.13.35.03.56-.1.21-.16.34-.31.52-.16.18-.33.4-.47.54-.15.15-.31.32-.13.63.18.31.8 1.32 1.72 2.14 1.18 1.05 2.17 1.37 2.48 1.53.31.15.49.13.67-.08.19-.21.79-.92 1-1.23.21-.31.42-.26.71-.15.29.11 1.84.87 2.15 1.03.32.15.53.23.61.37.08.14.08.82-.16 1.5z"/></svg>
+                            <div>
+                                <strong style="display: block; font-size: 15px; color: #121212;">Confirm Order via WhatsApp</strong>
+                                <span style="font-size: 13px; color: #555555;">Send your order details to WhatsApp for 1-day express priority dispatch.</span>
+                            </div>
+                        </div>
+                        <a href="<?php echo esc_url( $wa_order_url ); ?>" target="_blank" rel="noopener noreferrer" class="wl-btn wl-btn--whatsapp" style="display: inline-flex; align-items: center; gap: 8px; background-color: #25D366; color: #ffffff; padding: 10px 20px; font-weight: 600; border-radius: 6px; text-decoration: none; font-size: 14px;">
+                            Chat on WhatsApp
+                        </a>
+                    </div>
+                    <?php endif; ?>
 
                     <!-- Order Details Grid (2 Columns) -->
                     <div class="wl-order-details-grid">
@@ -138,8 +176,8 @@ get_header();
                                     <span><?php echo wp_kses_post( $order->get_subtotal_to_display() ); ?></span>
                                 </div>
                                 <div class="wl-order-totals__row">
-                                    <span>Shipping</span>
-                                    <span class="wl-order-totals__free">FREE</span>
+                                    <span>Delivery Charges</span>
+                                    <span>Rs. 350</span>
                                 </div>
                                 <div class="wl-order-totals__row wl-order-totals__row--total">
                                     <span>Total Amount Due (COD)</span>

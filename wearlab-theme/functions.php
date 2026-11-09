@@ -191,11 +191,60 @@ function wearlab_ensure_policy_pages() {
 	}
 }
 
-// Fallback routing for policy and contact pages so they never 404
+// Intercept order-received endpoint early (priority 1) to guarantee Thank You page renders
+add_action( 'template_redirect', 'wearlab_handle_order_received_endpoint', 1 );
+function wearlab_handle_order_received_endpoint() {
+	$uri = $_SERVER['REQUEST_URI'] ?? '';
+	if ( preg_match( '#order-received[=/](\d+)#i', $uri, $matches ) || ( false !== stripos( $uri, 'order-received' ) && ! empty( $_GET['order_id'] ) ) ) {
+		$order_id = ! empty( $matches[1] ) ? absint( $matches[1] ) : absint( $_GET['order_id'] ?? 0 );
+		status_header( 200 );
+		global $wp, $wp_query;
+		if ( is_object( $wp_query ) ) {
+			$wp_query->is_404  = false;
+			$wp_query->is_page = true;
+		}
+		if ( is_object( $wp ) ) {
+			$wp->query_vars['order-received'] = $order_id;
+		}
+		$thankyou_file = get_template_directory() . '/woocommerce/checkout/thankyou.php';
+		if ( file_exists( $thankyou_file ) ) {
+			include $thankyou_file;
+			exit;
+		}
+	}
+}
+
+// Register rewrite endpoint for order-received
+add_action( 'init', 'wearlab_register_order_received_endpoint', 5 );
+function wearlab_register_order_received_endpoint() {
+	add_rewrite_endpoint( 'order-received', EP_ROOT | EP_PAGES );
+}
+
+// Fallback routing for policy, checkout, and contact pages so they never 404
 add_action( 'template_redirect', 'wearlab_policy_page_redirect_fallback', 5 );
 function wearlab_policy_page_redirect_fallback() {
 	if ( is_404() && ! empty( $_SERVER['REQUEST_URI'] ) ) {
-		$request_path = trim( parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ), '/' );
+		$request_uri  = $_SERVER['REQUEST_URI'];
+		$request_path = trim( parse_url( $request_uri, PHP_URL_PATH ), '/' );
+
+		// Check for order-received fallback
+		if ( preg_match( '#order-received[=/](\d+)#i', $request_uri, $matches ) ) {
+			status_header( 200 );
+			global $wp, $wp_query;
+			if ( is_object( $wp_query ) ) {
+				$wp_query->is_404  = false;
+				$wp_query->is_page = true;
+			}
+			if ( is_object( $wp ) ) {
+				$wp->query_vars['order-received'] = absint( $matches[1] );
+			}
+			$thankyou_file = get_template_directory() . '/woocommerce/checkout/thankyou.php';
+			if ( file_exists( $thankyou_file ) ) {
+				include $thankyou_file;
+				exit;
+			}
+		}
+
 		$routes = array(
 			'contact'                => 'page-contact.php',
 			'contact-us'             => 'page-contact.php',
@@ -207,6 +256,8 @@ function wearlab_policy_page_redirect_fallback() {
 			'privacy-policy'         => 'page-privacy-policy.php',
 			'terms-conditions'       => 'page-terms-conditions.php',
 			'terms-and-conditions'   => 'page-terms-conditions.php',
+			'shop'                   => 'archive-product.php',
+			'checkout'               => 'page-checkout.php',
 		);
 		if ( isset( $routes[ $request_path ] ) ) {
 			status_header( 200 );
@@ -602,6 +653,64 @@ if ( class_exists( 'WooCommerce' ) ) {
 		}
 		if ( empty( $order->get_shipping_postcode() ) ) {
 			$order->set_shipping_postcode( '44000' );
+		}
+	}
+
+	// Apply flat Rs. 350 delivery charges across checkout and cart
+	add_action( 'woocommerce_cart_calculate_fees', 'wearlab_apply_flat_delivery_fee', 25 );
+	function wearlab_apply_flat_delivery_fee( $cart ) {
+		if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
+			return;
+		}
+		$shipping_total = (float) $cart->get_shipping_total();
+		if ( $shipping_total <= 0 ) {
+			$cart->add_fee( __( 'Delivery Charges', 'wearlab' ), 350, false );
+		}
+	}
+
+	// Dispatch order notifications to Customer & Admin + set order processing
+	add_action( 'woocommerce_checkout_order_processed', 'wearlab_order_processed_alerts', 20, 3 );
+	function wearlab_order_processed_alerts( $order_id, $posted_data, $order ) {
+		if ( ! $order ) {
+			$order = wc_get_order( $order_id );
+		}
+		if ( ! $order ) {
+			return;
+		}
+
+		// Ensure order status is processing for COD orders so it appears active in admin
+		if ( $order->get_payment_method() === 'cod' && ( $order->has_status( 'pending' ) || $order->has_status( 'on-hold' ) ) ) {
+			$order->update_status( 'processing', __( 'Order placed via COD on WEARLAB store.', 'wearlab' ) );
+		}
+
+		// Trigger WooCommerce emails (Customer confirmation + Admin notification)
+		if ( function_exists( 'WC' ) && isset( WC()->mailer ) ) {
+			$mailer = WC()->mailer();
+			$emails = $mailer->get_emails();
+
+			// Customer processing order email (Order Confirmation)
+			if ( isset( $emails['WC_Email_Customer_Processing_Order'] ) ) {
+				$emails['WC_Email_Customer_Processing_Order']->trigger( $order_id );
+			}
+
+			// Admin new order notification email
+			if ( isset( $emails['WC_Email_New_Order'] ) ) {
+				$emails['WC_Email_New_Order']->trigger( $order_id );
+			}
+		}
+	}
+
+	add_action( 'woocommerce_thankyou', 'wearlab_thankyou_order_alerts', 10, 1 );
+	function wearlab_thankyou_order_alerts( $order_id ) {
+		if ( ! $order_id ) {
+			return;
+		}
+		$order = wc_get_order( $order_id );
+		if ( ! $order ) {
+			return;
+		}
+		if ( $order->has_status( 'on-hold' ) || $order->has_status( 'pending' ) ) {
+			$order->update_status( 'processing', __( 'Order confirmed by customer on thank you page.', 'wearlab' ) );
 		}
 	}
 

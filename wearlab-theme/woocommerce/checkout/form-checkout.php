@@ -134,11 +134,11 @@ $checkout = $has_wc ? WC()->checkout() : null;
 					</div>
 					<div class="wl-co-method-box">
 						<div class="wl-co-method-box__left">
-							<strong class="wl-co-method-box__title">Shipping</strong>
-							<span class="wl-co-method-box__sub">Tracking number provided</span>
+							<strong class="wl-co-method-box__title">Standard Delivery (Across Pakistan)</strong>
+							<span class="wl-co-method-box__sub">Nationwide courier with tracking (3–5 business days)</span>
 						</div>
 						<div class="wl-co-method-box__price">
-							FREE
+							Rs. 350
 						</div>
 					</div>
 				</section>
@@ -276,8 +276,8 @@ $checkout = $has_wc ? WC()->checkout() : null;
 						<span class="wl-co-total-num"><?php echo $subtotal_val; // phpcs:ignore ?></span>
 					</div>
 					<div class="wl-co-total-row">
-						<span>Shipping <button type="button" class="wl-co-shipping-tooltip" title="Free standard shipping across Pakistan">?</button></span>
-						<span class="wl-co-shipping-free">FREE</span>
+						<span>Delivery Charges <button type="button" class="wl-co-shipping-tooltip" title="Standard delivery across Pakistan">?</button></span>
+						<span class="wl-co-shipping-fee">Rs. 350</span>
 					</div>
 					<div class="wl-co-total-row wl-co-total-final">
 						<span class="wl-co-total-final__label">Total</span>

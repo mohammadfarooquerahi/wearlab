@@ -147,7 +147,7 @@ if ( $wa_enabled && ! empty( $wa_num_clean ) ) :
 </a>
 <?php endif; ?>
 
-<!-- Preloader Dismiss Script (Fade out once DOM and assets load) -->
+<!-- Preloader Dismiss Script (Fast instant fade on DOM ready) -->
 <script id="wl-preloader-dismiss-script">
 (function() {
     function dismissWlPreloader() {
@@ -158,16 +158,17 @@ if ( $wa_enabled && ! empty( $wa_num_clean ) ) :
                 if (loader && loader.parentNode) {
                     loader.parentNode.removeChild(loader);
                 }
-            }, 450);
+            }, 250);
         }
     }
-    if (document.readyState === 'complete') {
+    if (document.readyState === 'interactive' || document.readyState === 'complete') {
         dismissWlPreloader();
     } else {
+        document.addEventListener('DOMContentLoaded', dismissWlPreloader);
         window.addEventListener('load', dismissWlPreloader);
     }
-    // Safety fail-safe: dismiss after 2.8s even on slow 3G network
-    setTimeout(dismissWlPreloader, 2800);
+    // Instant safety fail-safe: dismiss after 500ms so site displays immediately
+    setTimeout(dismissWlPreloader, 500);
 })();
 </script>
 

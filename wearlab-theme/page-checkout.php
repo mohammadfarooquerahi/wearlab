@@ -9,12 +9,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $wp;
 
 // 1. Check if this is the Order Received / Thank You page
+$request_uri = $_SERVER['REQUEST_URI'] ?? '';
+$uri_matches = array();
 $is_order_received = ( function_exists( 'is_order_received_page' ) && is_order_received_page() )
 	|| ( function_exists( 'is_wc_endpoint_url' ) && is_wc_endpoint_url( 'order-received' ) )
-	|| isset( $wp->query_vars['order-received'] );
+	|| isset( $wp->query_vars['order-received'] )
+	|| preg_match( '#order-received[=/](\d+)#i', $request_uri, $uri_matches );
 
 if ( $is_order_received ) {
-	$order_id = isset( $wp->query_vars['order-received'] ) ? absint( $wp->query_vars['order-received'] ) : 0;
+	$order_id = isset( $wp->query_vars['order-received'] ) ? absint( $wp->query_vars['order-received'] ) : ( ! empty( $uri_matches[1] ) ? absint( $uri_matches[1] ) : 0 );
 	if ( ! $order_id && isset( $_GET['order_id'] ) ) {
 		$order_id = absint( $_GET['order_id'] );
 	}
