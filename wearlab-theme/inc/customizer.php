@@ -217,180 +217,64 @@ function wearlab_customize_register( $wp_customize ) {
 	) );
 
 	/* ==========================================================================
-	   5. Homepage - Shop by Fit (Denim & Streetwear)
+	   5. Homepage - Social Media & Streetwear Community Showcase
 	   ========================================================================== */
-	$wp_customize->add_section( 'wearlab_home_fits', array(
-		'title'    => __( 'Homepage: Shop by Fit Cards', 'wearlab' ),
+	$wp_customize->add_section( 'wearlab_home_social', array(
+		'title'    => __( 'Homepage: Social & Community Showcase', 'wearlab' ),
 		'priority' => 43,
 	) );
 
-	$wp_customize->add_setting( 'wearlab_fit_overline', array(
-		'default'           => 'DENIM & STREETWEAR',
+	$wp_customize->add_setting( 'wearlab_social_overline', array(
+		'default'           => 'COMMUNITY & STREET CULTURE',
 		'sanitize_callback' => 'sanitize_text_field',
 	) );
-	$wp_customize->add_control( 'wearlab_fit_overline', array(
+	$wp_customize->add_control( 'wearlab_social_overline', array(
 		'label'   => __( 'Overline', 'wearlab' ),
-		'section' => 'wearlab_home_fits',
+		'section' => 'wearlab_home_social',
 		'type'    => 'text',
 	) );
 
-	$wp_customize->add_setting( 'wearlab_fit_title', array(
-		'default'           => 'Shop by Fit',
+	$wp_customize->add_setting( 'wearlab_social_title', array(
+		'default'           => 'FOLLOW THE LAB.',
 		'sanitize_callback' => 'sanitize_text_field',
 	) );
-	$wp_customize->add_control( 'wearlab_fit_title', array(
+	$wp_customize->add_control( 'wearlab_social_title', array(
 		'label'   => __( 'Title', 'wearlab' ),
-		'section' => 'wearlab_home_fits',
+		'section' => 'wearlab_home_social',
 		'type'    => 'text',
 	) );
 
-	// Fit Card 1
-	$wp_customize->add_setting( 'wearlab_fit_1_name', array(
-		'default'           => 'Wide Leg',
+	$wp_customize->add_setting( 'wearlab_social_subtitle', array(
+		'default'           => 'Tag @wearlab_official to be featured in upcoming drops.',
 		'sanitize_callback' => 'sanitize_text_field',
 	) );
-	$wp_customize->add_control( 'wearlab_fit_1_name', array(
-		'label'   => __( 'Fit 1: Title', 'wearlab' ),
-		'section' => 'wearlab_home_fits',
+	$wp_customize->add_control( 'wearlab_social_subtitle', array(
+		'label'   => __( 'Subtitle', 'wearlab' ),
+		'section' => 'wearlab_home_social',
 		'type'    => 'text',
 	) );
-	$wp_customize->add_setting( 'wearlab_fit_1_price', array(
-		'default'           => 'Rs.3,995.00 PKR',
-		'sanitize_callback' => 'sanitize_text_field',
-	) );
-	$wp_customize->add_control( 'wearlab_fit_1_price', array(
-		'label'   => __( 'Fit 1: Price / Tagline', 'wearlab' ),
-		'section' => 'wearlab_home_fits',
-		'type'    => 'text',
-	) );
-	$wp_customize->add_setting( 'wearlab_fit_1_link', array(
-		'default'           => '/shop/?filter_fit=wide-leg',
-		'sanitize_callback' => 'esc_url_raw',
-	) );
-	$wp_customize->add_control( 'wearlab_fit_1_link', array(
-		'label'   => __( 'Fit 1: Link URL', 'wearlab' ),
-		'section' => 'wearlab_home_fits',
-		'type'    => 'text',
-	) );
-	$wp_customize->add_setting( 'wearlab_fit_1_img', array(
+
+	$wp_customize->add_setting( 'wearlab_social_bg_img', array(
 		'default'           => '',
 		'sanitize_callback' => 'esc_url_raw',
 	) );
-	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'wearlab_fit_1_img', array(
-		'label'   => __( 'Fit 1: Custom Image', 'wearlab' ),
-		'section' => 'wearlab_home_fits',
+	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'wearlab_social_bg_img', array(
+		'label'       => __( 'Background Image', 'wearlab' ),
+		'description' => __( 'Optional background image behind the social showcase. Defaults to campaign artwork.', 'wearlab' ),
+		'section'     => 'wearlab_home_social',
 	) ) );
 
-	// Fit Card 2
-	$wp_customize->add_setting( 'wearlab_fit_2_name', array(
-		'default'           => 'Straight Leg',
-		'sanitize_callback' => 'sanitize_text_field',
-	) );
-	$wp_customize->add_control( 'wearlab_fit_2_name', array(
-		'label'   => __( 'Fit 2: Title', 'wearlab' ),
-		'section' => 'wearlab_home_fits',
-		'type'    => 'text',
-	) );
-	$wp_customize->add_setting( 'wearlab_fit_2_price', array(
-		'default'           => 'Rs.3,995.00 PKR',
-		'sanitize_callback' => 'sanitize_text_field',
-	) );
-	$wp_customize->add_control( 'wearlab_fit_2_price', array(
-		'label'   => __( 'Fit 2: Price / Tagline', 'wearlab' ),
-		'section' => 'wearlab_home_fits',
-		'type'    => 'text',
-	) );
-	$wp_customize->add_setting( 'wearlab_fit_2_link', array(
-		'default'           => '/shop/?filter_fit=straight-leg',
-		'sanitize_callback' => 'esc_url_raw',
-	) );
-	$wp_customize->add_control( 'wearlab_fit_2_link', array(
-		'label'   => __( 'Fit 2: Link URL', 'wearlab' ),
-		'section' => 'wearlab_home_fits',
-		'type'    => 'text',
-	) );
-	$wp_customize->add_setting( 'wearlab_fit_2_img', array(
-		'default'           => '',
-		'sanitize_callback' => 'esc_url_raw',
-	) );
-	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'wearlab_fit_2_img', array(
-		'label'   => __( 'Fit 2: Custom Image', 'wearlab' ),
-		'section' => 'wearlab_home_fits',
-	) ) );
-
-	// Fit Card 3
-	$wp_customize->add_setting( 'wearlab_fit_3_name', array(
-		'default'           => 'Bootcut',
-		'sanitize_callback' => 'sanitize_text_field',
-	) );
-	$wp_customize->add_control( 'wearlab_fit_3_name', array(
-		'label'   => __( 'Fit 3: Title', 'wearlab' ),
-		'section' => 'wearlab_home_fits',
-		'type'    => 'text',
-	) );
-	$wp_customize->add_setting( 'wearlab_fit_3_price', array(
-		'default'           => 'Rs.3,995.00 PKR',
-		'sanitize_callback' => 'sanitize_text_field',
-	) );
-	$wp_customize->add_control( 'wearlab_fit_3_price', array(
-		'label'   => __( 'Fit 3: Price / Tagline', 'wearlab' ),
-		'section' => 'wearlab_home_fits',
-		'type'    => 'text',
-	) );
-	$wp_customize->add_setting( 'wearlab_fit_3_link', array(
-		'default'           => '/shop/?filter_fit=bootcut',
-		'sanitize_callback' => 'esc_url_raw',
-	) );
-	$wp_customize->add_control( 'wearlab_fit_3_link', array(
-		'label'   => __( 'Fit 3: Link URL', 'wearlab' ),
-		'section' => 'wearlab_home_fits',
-		'type'    => 'text',
-	) );
-	$wp_customize->add_setting( 'wearlab_fit_3_img', array(
-		'default'           => '',
-		'sanitize_callback' => 'esc_url_raw',
-	) );
-	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'wearlab_fit_3_img', array(
-		'label'   => __( 'Fit 3: Custom Image', 'wearlab' ),
-		'section' => 'wearlab_home_fits',
-	) ) );
-
-	// Fit Card 4
-	$wp_customize->add_setting( 'wearlab_fit_4_name', array(
-		'default'           => 'Wide Leg Low Rise',
-		'sanitize_callback' => 'sanitize_text_field',
-	) );
-	$wp_customize->add_control( 'wearlab_fit_4_name', array(
-		'label'   => __( 'Fit 4: Title', 'wearlab' ),
-		'section' => 'wearlab_home_fits',
-		'type'    => 'text',
-	) );
-	$wp_customize->add_setting( 'wearlab_fit_4_price', array(
-		'default'           => 'Rs.3,995.00 PKR',
-		'sanitize_callback' => 'sanitize_text_field',
-	) );
-	$wp_customize->add_control( 'wearlab_fit_4_price', array(
-		'label'   => __( 'Fit 4: Price / Tagline', 'wearlab' ),
-		'section' => 'wearlab_home_fits',
-		'type'    => 'text',
-	) );
-	$wp_customize->add_setting( 'wearlab_fit_4_link', array(
-		'default'           => '/shop/?filter_fit=wide-leg-low-rise',
-		'sanitize_callback' => 'esc_url_raw',
-	) );
-	$wp_customize->add_control( 'wearlab_fit_4_link', array(
-		'label'   => __( 'Fit 4: Link URL', 'wearlab' ),
-		'section' => 'wearlab_home_fits',
-		'type'    => 'text',
-	) );
-	$wp_customize->add_setting( 'wearlab_fit_4_img', array(
-		'default'           => '',
-		'sanitize_callback' => 'esc_url_raw',
-	) );
-	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'wearlab_fit_4_img', array(
-		'label'   => __( 'Fit 4: Custom Image', 'wearlab' ),
-		'section' => 'wearlab_home_fits',
-	) ) );
+	for ( $i = 1; $i <= 6; $i++ ) {
+		$wp_customize->add_setting( "wearlab_social_img_{$i}", array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_url_raw',
+		) );
+		$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, "wearlab_social_img_{$i}", array(
+			'label'       => sprintf( __( 'Gallery Photo %d', 'wearlab' ), $i ),
+			'description' => __( 'Upload a custom photo. If left empty, defaults to WEARLAB photoshoot drop photo.', 'wearlab' ),
+			'section'     => 'wearlab_home_social',
+		) ) );
+	}
 
 	/* ==========================================================================
 	   6. Homepage - Brand Statement Section

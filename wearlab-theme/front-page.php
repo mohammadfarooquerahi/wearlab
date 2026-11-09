@@ -20,44 +20,20 @@ $featured_title    = get_theme_mod( 'wearlab_featured_title', 'MADE FOR YOUR EVE
 $featured_desc     = get_theme_mod( 'wearlab_featured_desc', 'Discover our latest essentials — designed with clean silhouettes, modern details and the confidence to stand on their own.' );
 $featured_btn_text = get_theme_mod( 'wearlab_featured_btn_text', 'SHOP ALL' );
 
-// 3. Shop by Fit Settings
-$fit_overline = get_theme_mod( 'wearlab_fit_overline', 'DENIM & STREETWEAR' );
-$fit_title    = get_theme_mod( 'wearlab_fit_title', 'Shop by Fit' );
-
-$fit_1_name  = get_theme_mod( 'wearlab_fit_1_name', 'Wide Leg' );
-$fit_1_price = get_theme_mod( 'wearlab_fit_1_price', 'Rs.3,995.00 PKR' );
-$fit_1_link  = get_theme_mod( 'wearlab_fit_1_link', '/shop/?filter_fit=wide-leg' );
-$fit_1_img   = get_theme_mod( 'wearlab_fit_1_img', '' ) ?: $theme_uri . '/assets/images/fit-card-1.jpg';
-
-$fit_2_name  = get_theme_mod( 'wearlab_fit_2_name', 'Straight Leg' );
-$fit_2_price = get_theme_mod( 'wearlab_fit_2_price', 'Rs.3,995.00 PKR' );
-$fit_2_link  = get_theme_mod( 'wearlab_fit_2_link', '/shop/?filter_fit=straight-leg' );
-$fit_2_img   = get_theme_mod( 'wearlab_fit_2_img', '' ) ?: $theme_uri . '/assets/images/fit-card-2.jpg';
-
-$fit_3_name  = get_theme_mod( 'wearlab_fit_3_name', 'Bootcut' );
-$fit_3_price = get_theme_mod( 'wearlab_fit_3_price', 'Rs.3,995.00 PKR' );
-$fit_3_link  = get_theme_mod( 'wearlab_fit_3_link', '/shop/?filter_fit=bootcut' );
-$fit_3_img   = get_theme_mod( 'wearlab_fit_3_img', '' ) ?: $theme_uri . '/assets/images/fit-card-3.jpg';
-
-$fit_4_name  = get_theme_mod( 'wearlab_fit_4_name', 'Wide Leg Low Rise' );
-$fit_4_price = get_theme_mod( 'wearlab_fit_4_price', 'Rs.3,995.00 PKR' );
-$fit_4_link  = get_theme_mod( 'wearlab_fit_4_link', '/shop/?filter_fit=wide-leg-low-rise' );
-$fit_4_img   = get_theme_mod( 'wearlab_fit_4_img', '' ) ?: $theme_uri . '/assets/images/fit-card-4.jpg';
-
-// 4. Brand Statement Settings
+// 3. Brand Statement Settings
 $brand_overline = get_theme_mod( 'wearlab_brand_overline', 'THE WEARLAB STANDARD' );
 $brand_title    = get_theme_mod( 'wearlab_brand_title', 'LESS NOISE. MORE STYLE.' );
 $brand_text     = get_theme_mod( 'wearlab_brand_text', 'We believe in creating high-quality, modern streetwear that speaks for itself. No loud logos, no fast fashion compromises. Just premium fabrics, thoughtful cuts, and designs made for your everyday life.' );
 $brand_btn_text = get_theme_mod( 'wearlab_brand_btn_text', 'OUR STORY' );
 $brand_btn_link = get_theme_mod( 'wearlab_brand_btn_link', '/about/' );
 
-// 5. Collection Banner Settings
+// 4. Collection Banner Settings
 $feature_overline = get_theme_mod( 'wearlab_feature_overline', 'THE COLLECTION' );
 $feature_title    = get_theme_mod( 'wearlab_feature_title', 'QUIETLY BOLD.' );
 $feature_text     = get_theme_mod( 'wearlab_feature_text', 'Engineered for the modern wardrobe, our pieces combine minimalist aesthetics with superior craftsmanship.' );
 $feature_btn_text = get_theme_mod( 'wearlab_feature_btn_text', 'SHOP WEARLAB' );
 $feature_btn_link = get_theme_mod( 'wearlab_feature_btn_link', '/shop/' );
-$feature_img      = get_theme_mod( 'wearlab_feature_img', '' ) ?: $theme_uri . '/assets/images/cat-drop-shoulders.jpg';
+$feature_img      = get_theme_mod( 'wearlab_feature_img', '' ) ?: $theme_uri . '/assets/images/p2 pic3.jpeg';
 
 // 6. Reviews Settings
 $reviews_overline = get_theme_mod( 'wearlab_reviews_overline', 'CUSTOMER LOVE' );
@@ -186,7 +162,7 @@ $cta_btn_link = get_theme_mod( 'wearlab_cta_btn_link', '/shop/' );
                         'badge' => 'NEW ARRIVAL',
                         'sizes' => array( 'S', 'M', 'L', 'XL' ),
                         'link'  => '/product-category/drop-shoulders/',
-                        'img'   => $theme_uri . '/assets/images/product-placeholder-1.jpg',
+                        'img'   => $theme_uri . '/assets/images/p2 pic1.jpeg',
                     ),
                     array(
                         'name'  => 'Drop Shoulder Vibes',
@@ -194,7 +170,7 @@ $cta_btn_link = get_theme_mod( 'wearlab_cta_btn_link', '/shop/' );
                         'badge' => 'BEST SELLER',
                         'sizes' => array( 'S', 'M', 'L', 'XL' ),
                         'link'  => '/product-category/drop-shoulders/',
-                        'img'   => $theme_uri . '/assets/images/product-placeholder-2.jpg',
+                        'img'   => $theme_uri . '/assets/images/p1 pic1.jpeg',
                     ),
                     array(
                         'name'  => 'WEARLAB Polo',
@@ -246,69 +222,7 @@ $cta_btn_link = get_theme_mod( 'wearlab_cta_btn_link', '/shop/' );
     </div>
 </section>
 
-<!-- 3. Shop by Fit Section -->
-<section class="wl-shop-by-fit">
-    <div class="wl-container">
-        <div class="wl-shop-by-fit__header">
-            <span class="wl-shop-by-fit__overline"><?php echo esc_html( $fit_overline ); ?></span>
-            <h2 class="wl-shop-by-fit__title"><?php echo esc_html( $fit_title ); ?></h2>
-        </div>
-
-        <div class="wl-fit-grid">
-            <!-- Fit 1 -->
-            <a href="<?php echo esc_url( home_url( $fit_1_link ) ); ?>" class="wl-fit-card">
-                <div class="wl-fit-card__image-wrap">
-                    <span class="wl-fit-card__badge">#1 BEST SELLER</span>
-                    <img src="<?php echo esc_url( $fit_1_img ); ?>" alt="<?php echo esc_attr( $fit_1_name ); ?>" class="wl-fit-card__img">
-                </div>
-                <div class="wl-fit-card__meta">
-                    <h3 class="wl-fit-card__name"><?php echo esc_html( $fit_1_name ); ?></h3>
-                    <p class="wl-fit-card__price"><?php echo esc_html( $fit_1_price ); ?></p>
-                    <span class="wl-fit-card__tag">BEST SELLER</span>
-                </div>
-            </a>
-
-            <!-- Fit 2 -->
-            <a href="<?php echo esc_url( home_url( $fit_2_link ) ); ?>" class="wl-fit-card">
-                <div class="wl-fit-card__image-wrap">
-                    <img src="<?php echo esc_url( $fit_2_img ); ?>" alt="<?php echo esc_attr( $fit_2_name ); ?>" class="wl-fit-card__img">
-                </div>
-                <div class="wl-fit-card__meta">
-                    <h3 class="wl-fit-card__name"><?php echo esc_html( $fit_2_name ); ?></h3>
-                    <p class="wl-fit-card__price"><?php echo esc_html( $fit_2_price ); ?></p>
-                </div>
-            </a>
-
-            <!-- Fit 3 -->
-            <a href="<?php echo esc_url( home_url( $fit_3_link ) ); ?>" class="wl-fit-card wl-fit-card--active">
-                <div class="wl-fit-card__image-wrap">
-                    <img src="<?php echo esc_url( $fit_3_img ); ?>" alt="<?php echo esc_attr( $fit_3_name ); ?>" class="wl-fit-card__img">
-                </div>
-                <div class="wl-fit-card__meta">
-                    <h3 class="wl-fit-card__name"><?php echo esc_html( $fit_3_name ); ?></h3>
-                    <p class="wl-fit-card__price"><?php echo esc_html( $fit_3_price ); ?></p>
-                </div>
-            </a>
-
-            <!-- Fit 4 -->
-            <a href="<?php echo esc_url( home_url( $fit_4_link ) ); ?>" class="wl-fit-card">
-                <div class="wl-fit-card__image-wrap">
-                    <img src="<?php echo esc_url( $fit_4_img ); ?>" alt="<?php echo esc_attr( $fit_4_name ); ?>" class="wl-fit-card__img">
-                </div>
-                <div class="wl-fit-card__meta">
-                    <h3 class="wl-fit-card__name"><?php echo esc_html( $fit_4_name ); ?></h3>
-                    <p class="wl-fit-card__price"><?php echo esc_html( $fit_4_price ); ?></p>
-                </div>
-            </a>
-        </div>
-
-        <div class="wl-shop-by-fit__action">
-            <a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>" class="wl-btn-dark">VIEW ALL FITS</a>
-        </div>
-    </div>
-</section>
-
-<!-- 4. Brand Statement Section -->
+<!-- 3. Brand Statement Section -->
 <section class="wl-brand-statement">
     <div class="wl-container wl-container--narrow">
         <p class="wl-overline"><?php echo esc_html( $brand_overline ); ?></p>
@@ -369,36 +283,120 @@ $cta_btn_link = get_theme_mod( 'wearlab_cta_btn_link', '/shop/' );
     </div>
 </section>
 
-<!-- 7. Instagram Showcase -->
-<section class="wl-instagram">
+<!-- 6. Social Media & Streetwear Community Showcase -->
+<?php
+$social_bg       = get_theme_mod( 'wearlab_social_bg_img', '' ) ?: $theme_uri . '/assets/images/p2 pic3.jpeg';
+$social_overline = get_theme_mod( 'wearlab_social_overline', 'COMMUNITY & STREET CULTURE' );
+$social_title    = get_theme_mod( 'wearlab_social_title', 'FOLLOW THE LAB.' );
+$social_subtitle = get_theme_mod( 'wearlab_social_subtitle', 'Tag @wearlab_official to be featured in upcoming drops.' );
+$ig_url          = get_theme_mod( 'wearlab_social_instagram', 'https://instagram.com/wearlab_official' );
+$tt_url          = get_theme_mod( 'wearlab_social_tiktok', 'https://www.tiktok.com/@wearlab' );
+$wa_num          = get_theme_mod( 'wearlab_social_whatsapp', '923001234567' );
+$wa_link         = 'https://wa.me/' . preg_replace( '/[^0-9]/', '', $wa_num ) . '?text=' . rawurlencode( 'Hi WEARLAB! I want to join the WhatsApp drop alerts.' );
+
+$social_photos = array(
+	array(
+		'img'   => get_theme_mod( 'wearlab_social_img_1', '' ) ?: $theme_uri . '/assets/images/p1 pic1.jpeg',
+		'title' => 'Drop Shoulder Vibes Tee',
+		'tag'   => '#VIBES',
+		'alt'   => 'WEARLAB Vibes Drop Shoulder Tee - Back Graphic Artwork',
+	),
+	array(
+		'img'   => get_theme_mod( 'wearlab_social_img_2', '' ) ?: $theme_uri . '/assets/images/p2 pic1.jpeg',
+		'title' => 'Drop Shoulder Retro Tee',
+		'tag'   => '#RETRO',
+		'alt'   => 'WEARLAB Retro Drop Shoulder Tee - Back Floral Artwork',
+	),
+	array(
+		'img'   => get_theme_mod( 'wearlab_social_img_3', '' ) ?: $theme_uri . '/assets/images/p1 pic2.jpeg',
+		'title' => 'Good Vibes Only Fit',
+		'tag'   => '#STREETWEAR',
+		'alt'   => 'WEARLAB Good Vibes Only Front Graphic',
+	),
+	array(
+		'img'   => get_theme_mod( 'wearlab_social_img_4', '' ) ?: $theme_uri . '/assets/images/p2 pic3.jpeg',
+		'title' => 'Quietly Bold Campaign',
+		'tag'   => '#QUIETLYBOLD',
+		'alt'   => 'WEARLAB Quietly Bold Campaign Poster',
+	),
+	array(
+		'img'   => get_theme_mod( 'wearlab_social_img_5', '' ) ?: $theme_uri . '/assets/images/p2 pic2.jpeg',
+		'title' => 'SSTZZ Retro Fit',
+		'tag'   => '#WEARLABFIT',
+		'alt'   => 'WEARLAB SSTZZ Retro Streetwear Tee Front',
+	),
+	array(
+		'img'   => get_theme_mod( 'wearlab_social_img_6', '' ) ?: $theme_uri . '/assets/images/p1 pic3.jpeg',
+		'title' => 'Desert Sand Silhouette',
+		'tag'   => '#LABDROP',
+		'alt'   => 'WEARLAB Vibes Oversized Tee Desert Sand Mockup',
+	),
+);
+?>
+<section class="wl-instagram wl-social-showcase" style="background-image: url('<?php echo esc_url( $social_bg ); ?>');">
+    <div class="wl-social-showcase__overlay-bg" aria-hidden="true"></div>
     <div class="wl-container">
         <div class="wl-instagram__header">
-            <h2 class="wl-section-title">FOLLOW THE LAB.</h2>
-            <?php
-            $ig_url = get_theme_mod( 'wearlab_social_instagram', 'https://instagram.com/wearlab_official' );
-            ?>
-            <a href="<?php echo esc_url( $ig_url ); ?>" class="wl-instagram__handle" target="_blank" rel="noopener">@WEARLAB_OFFICIAL</a>
+            <?php if ( ! empty( $social_overline ) ) : ?>
+                <span class="wl-social-showcase__overline"><?php echo esc_html( $social_overline ); ?></span>
+            <?php endif; ?>
+            <h2 class="wl-section-title wl-social-showcase__title"><?php echo esc_html( $social_title ); ?></h2>
+            <?php if ( ! empty( $social_subtitle ) ) : ?>
+                <p class="wl-social-showcase__subtitle"><?php echo esc_html( $social_subtitle ); ?></p>
+            <?php endif; ?>
+
+            <div class="wl-social-pills-wrap">
+                <?php if ( ! empty( $ig_url ) ) : ?>
+                <a href="<?php echo esc_url( $ig_url ); ?>" class="wl-social-pill wl-social-pill--ig" target="_blank" rel="noopener" aria-label="Follow WEARLAB on Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+                    <span>@WEARLAB_OFFICIAL</span>
+                </a>
+                <?php endif; ?>
+
+                <?php if ( ! empty( $tt_url ) ) : ?>
+                <a href="<?php echo esc_url( $tt_url ); ?>" class="wl-social-pill wl-social-pill--tt" target="_blank" rel="noopener" aria-label="Follow WEARLAB on TikTok">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.35 0 .68.06.98.17v-3.52a6.34 6.34 0 0 0-.98-.08 6.34 6.34 0 0 0-6.34 6.32 6.34 6.34 0 0 0 6.34 6.33 6.34 6.34 0 0 0 6.33-6.33V9.17a8.28 8.28 0 0 0 4.77 1.48V7.19c-.35 0-.7-.17-1-.5z"/></svg>
+                    <span>TikTok</span>
+                </a>
+                <?php endif; ?>
+
+                <?php if ( ! empty( $wa_link ) ) : ?>
+                <a href="<?php echo esc_url( $wa_link ); ?>" class="wl-social-pill wl-social-pill--wa" target="_blank" rel="noopener" aria-label="Join WEARLAB WhatsApp Drop Alerts">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                    <span>WhatsApp VIP Alerts</span>
+                </a>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
+
     <div class="wl-instagram__grid">
-        <?php
-        $ig_images = array(
-            'product-placeholder-1.jpg',
-            'product-placeholder-2.jpg',
-            'product-placeholder-3.jpg',
-            'product-placeholder-4.jpg',
-            'fit-card-1.jpg',
-            'fit-card-3.jpg',
-        );
-        foreach ( $ig_images as $ig ) :
-        ?>
-        <a href="<?php echo esc_url( $ig_url ); ?>" class="wl-instagram__item" target="_blank" rel="noopener">
-            <img src="<?php echo esc_url( $theme_uri . '/assets/images/' . $ig ); ?>" alt="WEARLAB Instagram">
+        <?php foreach ( $social_photos as $photo ) : ?>
+        <a href="<?php echo esc_url( $ig_url ); ?>" class="wl-instagram__item" target="_blank" rel="noopener" title="<?php echo esc_attr( $photo['title'] ); ?>">
+            <img src="<?php echo esc_url( $photo['img'] ); ?>" alt="<?php echo esc_attr( $photo['alt'] ); ?>" loading="lazy">
             <span class="wl-instagram__overlay">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                <span class="wl-instagram__overlay-tag"><?php echo esc_html( $photo['tag'] ); ?></span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                <span class="wl-instagram__overlay-label"><?php echo esc_html( $photo['title'] ); ?></span>
             </span>
         </a>
         <?php endforeach; ?>
+    </div>
+
+    <div class="wl-social-showcase__ticker">
+        <div class="wl-social-showcase__ticker-inner">
+            <span>STREETWEAR CULTURE</span>
+            <span class="wl-dot">•</span>
+            <span>100+ STREETWEAR FITS</span>
+            <span class="wl-dot">•</span>
+            <span>CASH ON DELIVERY NATIONWIDE</span>
+            <span class="wl-dot">•</span>
+            <span>FREE DELIVERY ON 3+ SHIRTS</span>
+            <span class="wl-dot">•</span>
+            <span>DESIGNED IN PAKISTAN</span>
+            <span class="wl-dot">•</span>
+            <span>WEARLAB.STORE</span>
+        </div>
     </div>
 </section>
 

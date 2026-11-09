@@ -7354,3 +7354,263 @@ body.ehf-footer #colophon,
 
 .wl-btn--whatsapp { background-color: #25D366 !important; color: #ffffff !important; transition: all 0.2s ease !important; }
 .wl-btn--whatsapp:hover { background-color: #1eb956 !important; box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4) !important; transform: translateY(-1px) !important; }
+
+/* ==========================================================================
+   Homepage: Social Media & Community Showcase
+   ========================================================================== */
+.wl-shop-by-fit { display: none !important; }
+
+.wl-instagram.wl-social-showcase {
+  position: relative;
+  background-color: #0d0e10;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #ffffff;
+  overflow: hidden;
+  padding: 88px 0 0;
+}
+
+.wl-social-showcase__overlay-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(13, 14, 16, 0.90) 0%, rgba(13, 14, 16, 0.96) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.wl-social-showcase .wl-container,
+.wl-social-showcase .wl-instagram__grid,
+.wl-social-showcase .wl-social-showcase__ticker {
+  position: relative;
+  z-index: 2;
+}
+
+.wl-social-showcase__overline {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #999999;
+  margin-bottom: 12px;
+}
+
+.wl-social-showcase__title {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #ffffff !important;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.wl-social-showcase__subtitle {
+  font-size: 14px;
+  color: #a0a0a0;
+  max-width: 500px;
+  margin: 0 auto 20px;
+}
+
+.wl-social-pills-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 24px auto 36px;
+}
+
+.wl-social-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+
+.wl-social-pill svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.wl-social-pill--ig {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.wl-social-pill--ig:hover {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  border-color: transparent;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(220, 39, 67, 0.4);
+}
+
+.wl-social-pill--tt {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.wl-social-pill--tt:hover {
+  background: #000000;
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: -2px 0 10px rgba(37, 244, 238, 0.4), 2px 0 10px rgba(254, 44, 85, 0.4);
+}
+
+.wl-social-pill--wa {
+  background: rgba(37, 211, 102, 0.12);
+  border: 1px solid rgba(37, 211, 102, 0.35);
+  color: #25d366;
+}
+
+.wl-social-pill--wa:hover {
+  background: #25d366;
+  border-color: #25d366;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+}
+
+.wl-social-showcase .wl-instagram__grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin: 0 auto;
+  max-width: 1400px;
+  padding: 0 20px;
+}
+
+.wl-social-showcase .wl-instagram__item {
+  aspect-ratio: 4/5;
+  background-color: #1a1c20;
+  border-radius: 6px;
+  position: relative;
+  display: block;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.wl-social-showcase .wl-instagram__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wl-social-showcase .wl-instagram__overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.78) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.wl-social-showcase .wl-instagram__overlay-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.wl-social-showcase .wl-instagram__overlay svg {
+  width: 26px;
+  height: 26px;
+  color: #ffffff;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+}
+
+.wl-social-showcase .wl-instagram__overlay-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #f0f0f0;
+  line-height: 1.3;
+}
+
+.wl-social-showcase .wl-instagram__item:hover img {
+  transform: scale(1.08);
+}
+
+.wl-social-showcase .wl-instagram__item:hover .wl-instagram__overlay {
+  opacity: 1;
+}
+
+.wl-social-showcase__ticker {
+  margin-top: 40px;
+  padding: 16px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.wl-social-showcase__ticker-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #888888;
+}
+
+.wl-social-showcase__ticker-inner .wl-dot {
+  color: #555555;
+}
+
+@media (max-width: 1023px) {
+  .wl-social-showcase .wl-instagram__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+}
+
+@media (max-width: 767px) {
+  .wl-instagram.wl-social-showcase {
+    padding-top: 60px;
+  }
+  .wl-social-showcase .wl-instagram__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 0 12px;
+  }
+  .wl-social-pills-wrap {
+    gap: 8px;
+  }
+  .wl-social-pill {
+    padding: 8px 14px;
+    font-size: 11px;
+  }
+  .wl-social-showcase__ticker-inner {
+    font-size: 10px;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 0 12px;
+  }
+}
