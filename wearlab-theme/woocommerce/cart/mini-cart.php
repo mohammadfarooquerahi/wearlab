@@ -22,6 +22,29 @@ $checkout_url = class_exists( 'WooCommerce' ) ? wc_get_checkout_url() : home_url
 ?>
 
 <div class="wl-cart-drawer__body">
+	<?php if ( $has_items ) : 
+		$free_ship_target   = 3;
+		$remaining_for_free = max( 0, $free_ship_target - $total_count );
+		$progress_pct       = min( 100, round( ( $total_count / $free_ship_target ) * 100 ) );
+	?>
+		<div class="wl-cart-shipping-bar" style="background: #f7f9fa; border-radius: 6px; padding: 10px 14px; margin: 12px 0 14px; border: 1px solid #ebebeb;">
+			<div style="font-size: 12px; font-weight: 600; color: #121212; display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+				<?php if ( $remaining_for_free === 0 ) : ?>
+					<span style="color: #008060; display: inline-flex; align-items: center; gap: 4px;">
+						<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#008060" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+						You unlocked FREE Delivery!
+					</span>
+				<?php else : ?>
+					<span>Add <?php echo esc_html( $remaining_for_free ); ?> more shirt<?php echo $remaining_for_free > 1 ? 's' : ''; ?> for <strong>FREE Delivery</strong></span>
+				<?php endif; ?>
+				<span style="font-size: 11px; color: #777; font-weight: 500;"><?php echo esc_html( $total_count ); ?>/3</span>
+			</div>
+			<div style="background: #e2e8f0; height: 5px; border-radius: 3px; overflow: hidden;">
+				<div style="background: <?php echo $remaining_for_free === 0 ? '#008060' : '#121212'; ?>; height: 100%; width: <?php echo esc_attr( $progress_pct ); ?>%; transition: width 0.3s ease;"></div>
+			</div>
+		</div>
+	<?php endif; ?>
+
 	<div class="wl-cart-drawer__columns-header">
 		<span>PRODUCT</span>
 		<span>TOTAL</span>

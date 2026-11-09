@@ -134,11 +134,11 @@ $checkout = $has_wc ? WC()->checkout() : null;
 					</div>
 					<div class="wl-co-method-box">
 						<div class="wl-co-method-box__left">
-							<strong class="wl-co-method-box__title">Standard Delivery (Across Pakistan)</strong>
-							<span class="wl-co-method-box__sub">Nationwide courier with tracking (3–5 business days)</span>
+							<strong class="wl-co-method-box__title"><?php echo ( $total_count >= 3 ) ? 'Standard Delivery (FREE on 3+ Shirts Offer)' : 'Standard Delivery (Across Pakistan)'; ?></strong>
+							<span class="wl-co-method-box__sub"><?php echo ( $total_count >= 3 ) ? 'Free nationwide delivery on 3+ shirts (3–5 business days)' : 'Nationwide courier with tracking (3–5 business days)'; ?></span>
 						</div>
-						<div class="wl-co-method-box__price">
-							Rs. 350
+						<div class="wl-co-method-box__price<?php echo ( $total_count >= 3 ) ? ' wl-co-shipping-free' : ''; ?>" style="<?php echo ( $total_count >= 3 ) ? 'color: #008060; font-weight: 700;' : ''; ?>">
+							<?php echo ( $total_count >= 3 ) ? 'FREE' : 'Rs. 250'; ?>
 						</div>
 					</div>
 				</section>
@@ -275,14 +275,56 @@ $checkout = $has_wc ? WC()->checkout() : null;
 						<span>Subtotal &bull; <?php echo esc_html( $total_count ); ?> items</span>
 						<span class="wl-co-total-num"><?php echo $subtotal_val; // phpcs:ignore ?></span>
 					</div>
+
+					<?php
+					// Calculate XL Surcharge for display
+					$co_xl_qty = 0;
+					if ( $has_wc && ! empty( $cart_items ) ) {
+						foreach ( $cart_items as $ci ) {
+							$sz = '';
+							if ( ! empty( $ci['variation'] ) ) {
+								foreach ( $ci['variation'] as $k => $v ) {
+									if ( false !== strpos( strtolower( $k ), 'size' ) ) {
+										$sz = $v;
+										break;
+									}
+								}
+							}
+							if ( empty( $sz ) && ! empty( $ci['pa_size'] ) ) $sz = $ci['pa_size'];
+							if ( empty( $sz ) && ! empty( $ci['data'] ) && method_exists( $ci['data'], 'get_attribute' ) ) {
+								$sz = $ci['data']->get_attribute( 'pa_size' );
+							}
+							if ( strtoupper( trim( $sz ) ) === 'XL' ) {
+								$co_xl_qty += (int) $ci['quantity'];
+							}
+						}
+					}
+					if ( $co_xl_qty > 0 ) :
+					?>
+						<div class="wl-co-total-row">
+							<span>XL Size Surcharge (+Rs. 100 &times; <?php echo esc_html( $co_xl_qty ); ?>)</span>
+							<span class="wl-co-total-num">Rs. <?php echo esc_html( 100 * $co_xl_qty ); ?></span>
+						</div>
+					<?php endif; ?>
+
 					<div class="wl-co-total-row">
-						<span>Delivery Charges <button type="button" class="wl-co-shipping-tooltip" title="Standard delivery across Pakistan">?</button></span>
-						<span class="wl-co-shipping-fee">Rs. 350</span>
+						<span>Delivery Charges <button type="button" class="wl-co-shipping-tooltip" title="<?php echo ( $total_count >= 3 ) ? 'Free delivery unlocked on 3 or more shirts!' : 'Standard delivery Rs. 250 across Pakistan. Free on 3+ shirts!'; ?>">?</button></span>
+						<?php if ( $total_count >= 3 ) : ?>
+							<span class="wl-co-shipping-free" style="color: #008060; font-weight: 700;">FREE</span>
+						<?php else : ?>
+							<span class="wl-co-shipping-fee">Rs. 250</span>
+						<?php endif; ?>
 					</div>
+					<?php if ( $total_count < 3 ) : ?>
+						<div style="font-size: 11px; color: #008060; margin-top: -6px; margin-bottom: 8px;">
+							Buy <?php echo ( 3 - $total_count ); ?> more shirt<?php echo ( 3 - $total_count ) > 1 ? 's' : ''; ?> for <strong>FREE Delivery</strong>!
+						</div>
+					<?php endif; ?>
+
 					<div class="wl-co-total-row wl-co-total-final">
 						<span class="wl-co-total-final__label">Total</span>
 						<span class="wl-co-total-final__amount">
-							<small>PKR</small> <strong><?php echo $has_wc ? WC()->cart->get_total() : 'Rs 7,997.00'; // phpcs:ignore ?></strong>
+							<small>PKR</small> <strong><?php echo $has_wc ? WC()->cart->get_total() : 'Rs 0.00'; // phpcs:ignore ?></strong>
 						</span>
 					</div>
 				</div>

@@ -400,6 +400,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     hiddenInput.dispatchEvent(new Event('change', { bubbles: true }));
                 }
             }
+
+            // Toggle XL size notice
+            const xlAlert = document.getElementById('wlPdpXlAlert');
+            if (xlAlert) {
+                if (val && val.toUpperCase().trim() === 'XL') {
+                    xlAlert.style.display = 'block';
+                } else {
+                    xlAlert.style.display = 'none';
+                }
+            }
+
             updateSelectedVariation();
         });
     });

@@ -656,15 +656,52 @@ if ( class_exists( 'WooCommerce' ) ) {
 		}
 	}
 
-	// Apply flat Rs. 350 delivery charges across checkout and cart
+	// 1. Delivery Charges: Rs. 250 (FREE on 3 or more shirts)
+	// 2. Extra Rs. 100 on XL size shirts
 	add_action( 'woocommerce_cart_calculate_fees', 'wearlab_apply_flat_delivery_fee', 25 );
 	function wearlab_apply_flat_delivery_fee( $cart ) {
 		if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
 			return;
 		}
+
+		$total_qty = $cart->get_cart_contents_count();
+
+		// Delivery Charges: Rs. 250 standard, FREE if 3 or more shirts/items
 		$shipping_total = (float) $cart->get_shipping_total();
 		if ( $shipping_total <= 0 ) {
-			$cart->add_fee( __( 'Delivery Charges', 'wearlab' ), 350, false );
+			if ( $total_qty >= 3 ) {
+				// Free delivery promo unlocked! (Rs. 0)
+			} else {
+				$cart->add_fee( __( 'Delivery Charges', 'wearlab' ), 250, false );
+			}
+		}
+
+		// Extra Rs. 100 on XL size items
+		$xl_qty = 0;
+		foreach ( $cart->get_cart() as $cart_item ) {
+			$item_size = '';
+			if ( ! empty( $cart_item['variation'] ) ) {
+				foreach ( $cart_item['variation'] as $attr_k => $attr_v ) {
+					if ( false !== strpos( strtolower( $attr_k ), 'size' ) ) {
+						$item_size = $attr_v;
+						break;
+					}
+				}
+			}
+			if ( empty( $item_size ) && ! empty( $cart_item['pa_size'] ) ) {
+				$item_size = $cart_item['pa_size'];
+			}
+			if ( empty( $item_size ) && ! empty( $cart_item['data'] ) && method_exists( $cart_item['data'], 'get_attribute' ) ) {
+				$item_size = $cart_item['data']->get_attribute( 'pa_size' );
+			}
+
+			if ( strtoupper( trim( $item_size ) ) === 'XL' ) {
+				$xl_qty += (int) $cart_item['quantity'];
+			}
+		}
+
+		if ( $xl_qty > 0 ) {
+			$cart->add_fee( sprintf( __( 'XL Size Surcharge (Rs. 100 x %d)', 'wearlab' ), $xl_qty ), 100 * $xl_qty, false );
 		}
 	}
 

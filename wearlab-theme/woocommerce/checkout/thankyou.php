@@ -107,9 +107,12 @@ get_header();
                                 3 &ndash; 5 Business Days
                             </span>
                         </div>
+                        <?php
+                        $is_free_shipping = ( $order && $order->get_item_count() >= 3 );
+                        ?>
                         <div class="wl-order-highlight-item">
                             <span class="wl-order-highlight-label">Delivery Charges</span>
-                            <span class="wl-order-highlight-value">Rs. 350 (Nationwide Courier)</span>
+                            <span class="wl-order-highlight-value"><?php echo $is_free_shipping ? 'FREE (3+ Shirts Promo)' : 'Rs. 250 (Standard Courier)'; ?></span>
                         </div>
                     </div>
 
@@ -175,9 +178,20 @@ get_header();
                                     <span>Subtotal</span>
                                     <span><?php echo wp_kses_post( $order->get_subtotal_to_display() ); ?></span>
                                 </div>
+
+                                <?php foreach ( $order->get_fees() as $fee ) : 
+                                    // Skip delivery fee here since we display it below
+                                    if ( false !== stripos( $fee->get_name(), 'Delivery' ) ) continue;
+                                ?>
+                                    <div class="wl-order-totals__row">
+                                        <span><?php echo esc_html( $fee->get_name() ); ?></span>
+                                        <span><?php echo wc_price( $fee->get_total() ); ?></span>
+                                    </div>
+                                <?php endforeach; ?>
+
                                 <div class="wl-order-totals__row">
                                     <span>Delivery Charges</span>
-                                    <span>Rs. 350</span>
+                                    <span><?php echo ( $order->get_item_count() >= 3 ) ? '<strong style="color: #008060;">FREE (3+ Shirts)</strong>' : 'Rs. 250'; ?></span>
                                 </div>
                                 <div class="wl-order-totals__row wl-order-totals__row--total">
                                     <span>Total Amount Due (COD)</span>

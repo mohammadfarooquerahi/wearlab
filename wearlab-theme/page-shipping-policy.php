@@ -100,8 +100,10 @@ get_header();
 
                     <h2>3. Shipping Charges</h2>
                     <ul class="wl-policy-checklist">
-                        <li>Standard shipping charges are calculated and displayed during checkout or communicated before order confirmation.</li>
-                        <li>Any applicable additional charges for special delivery requirements will be communicated to the customer.</li>
+                        <li>Standard nationwide delivery charge is <strong>Rs. 250</strong> per order across Pakistan.</li>
+                        <li><strong>Special Promotion:</strong> Enjoy <strong>FREE Delivery</strong> when you order 3 or more shirts!</li>
+                        <li>A small additional surcharge of <strong>Rs. 100</strong> applies for size XL items.</li>
+                        <li>All applicable charges are calculated transparently and itemized during checkout before placing your order.</li>
                     </ul>
 
                     <h2>4. Order Tracking</h2>

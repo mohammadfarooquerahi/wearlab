@@ -162,9 +162,18 @@ $dummy_related = array(
 							<div class="wl-pdp-swatches" data-attr="<?php echo esc_attr( $size_attr_name ); ?>">
 								<?php foreach ( $sizes as $i => $size ) :
 									$val = is_string( $size ) ? $size : wc_attribute_label( $size );
+									$is_xl = ( strtoupper( trim( $val ) ) === 'XL' );
 									?>
-									<button type="button" class="wl-pdp-swatch<?php echo 0 === $i ? ' is-selected' : ''; ?>" data-value="<?php echo esc_attr( $val ); ?>"><?php echo esc_html( $val ); ?></button>
+									<button type="button" class="wl-pdp-swatch<?php echo 0 === $i ? ' is-selected' : ''; ?><?php echo $is_xl ? ' wl-pdp-swatch--xl' : ''; ?>" data-value="<?php echo esc_attr( $val ); ?>">
+										<?php echo esc_html( $val ); ?>
+										<?php if ( $is_xl ) : ?>
+											<span class="wl-swatch-extra" style="font-size: 10px; font-weight: 700; opacity: 0.85; margin-left: 2px;">(+100)</span>
+										<?php endif; ?>
+									</button>
 								<?php endforeach; ?>
+							</div>
+							<div class="wl-pdp-xl-alert" id="wlPdpXlAlert" style="display: none; font-size: 12px; color: #121212; background: #f8f8f8; border-left: 3px solid #121212; padding: 6px 10px; margin-top: 8px; border-radius: 2px;">
+								<strong>XL Size Note:</strong> Rs. 100 extra applies for size XL.
 							</div>
 							<?php if ( $size_attr_name ) : ?>
 								<input type="hidden" class="wl-pdp-attr-input" name="<?php echo esc_attr( $size_attr_name ); ?>" value="<?php echo esc_attr( $sizes[0] ?? '' ); ?>">
@@ -186,6 +195,16 @@ $dummy_related = array(
 									<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><line x1="6" y1="0" x2="6" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="0" y1="6" x2="12" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
 								</button>
 							</div>
+						</div>
+
+						<div class="wl-pdp-promo-badge" style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: #008060; background: #f0faf4; border: 1px dashed #008060; border-radius: 6px; padding: 10px 14px; margin: 16px 0;">
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<rect x="1" y="3" width="15" height="13"></rect>
+								<polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon>
+								<circle cx="5.5" cy="18.5" r="2.5"></circle>
+								<circle cx="18.5" cy="18.5" r="2.5"></circle>
+							</svg>
+							<span><strong>SPECIAL OFFER:</strong> FREE Delivery on 3 or more shirts! (Flat Rs. 250 on 1-2 shirts)</span>
 						</div>
 
 						<div class="wl-pdp-actions">

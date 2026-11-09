@@ -162,7 +162,7 @@
                         <circle cx="5.5" cy="18.5" r="2.5"></circle>
                         <circle cx="18.5" cy="18.5" r="2.5"></circle>
                     </svg>
-                    <span>FREE SHIPPING NATIONWIDE</span>
+                    <span>FREE DELIVERY ON 3+ SHIRTS | FLAT RS. 250</span>
                 </div>
                 <div class="wl-topbar__divider"></div>
                 <div class="wl-topbar__item">

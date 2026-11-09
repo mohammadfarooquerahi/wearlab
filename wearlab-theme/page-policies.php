@@ -88,7 +88,9 @@ $contact_email = get_theme_mod( 'wearlab_contact_email', 'orders@wearlab.store' 
 
                         <h3>Shipping Charges</h3>
                         <ul class="wl-policy-checklist">
-                            <li>Standard shipping charges are calculated and displayed during checkout or communicated before order confirmation.</li>
+                            <li>Standard nationwide shipping charge is <strong>Rs. 250</strong> per order across Pakistan.</li>
+                            <li><strong>Special Promotion:</strong> Enjoy <strong>FREE Delivery</strong> when purchasing 3 or more shirts!</li>
+                            <li>An extra surcharge of <strong>Rs. 100</strong> applies for size XL products.</li>
                             <li>Any applicable additional charges for special delivery requirements will be communicated to the customer.</li>
                         </ul>
 
