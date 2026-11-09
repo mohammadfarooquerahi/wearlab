@@ -83,9 +83,9 @@ function wearlab_setup() {
 	add_theme_support( 'wc-product-gallery-lightbox' );
 	add_theme_support( 'wc-product-gallery-slider' );
 
-	// Image Sizes
-	add_image_size( 'product-card', 400, 533, true ); // 3:4 aspect ratio
-	add_image_size( 'product-single', 800, 1066, true ); // 3:4
+	// Image Sizes (false = uncropped proportional scaling, preserving full clothing and prints)
+	add_image_size( 'product-card', 600, 800, false );
+	add_image_size( 'product-single', 1200, 1200, false );
 	add_image_size( 'hero-banner', 1920, 800, true );
 
 	// Menus
@@ -97,6 +97,16 @@ function wearlab_setup() {
 	) );
 }
 add_action( 'after_setup_theme', 'wearlab_setup' );
+
+// Disable hard cropping in WooCommerce so entire clothing / prints are always 100% visible
+add_filter( 'woocommerce_get_image_size_thumbnail', function( $size ) {
+	$size['crop'] = 0;
+	return $size;
+} );
+add_filter( 'woocommerce_get_image_size_single', function( $size ) {
+	$size['crop'] = 0;
+	return $size;
+} );
 
 // Auto-migrate theme mods if folder name changes (e.g. wearlab vs wearlab-theme)
 add_action( 'after_setup_theme', 'wearlab_migrate_theme_mods', 20 );

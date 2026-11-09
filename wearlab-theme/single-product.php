@@ -106,9 +106,11 @@ $dummy_related = array(
 		<div class="wl-pdp__layout">
 			<div class="wl-pdp__gallery-wrapper">
 				<div class="wl-pdp__gallery" data-pdp-gallery>
-					<?php foreach ( $gallery as $idx => $img ) : ?>
+					<?php foreach ( $gallery as $idx => $img ) : 
+						$full_src = ! empty( $img['full'] ) ? $img['full'] : $img['thumb'];
+					?>
 						<figure class="wl-pdp__shot" data-slide-index="<?php echo esc_attr( $idx ); ?>">
-							<img src="<?php echo esc_url( $img['thumb'] ); ?>" alt="<?php echo esc_attr( $img['alt'] ); ?>" <?php echo ( 0 === $idx ) ? 'fetchpriority="high"' : 'loading="lazy"'; ?>>
+							<img src="<?php echo esc_url( $full_src ); ?>" alt="<?php echo esc_attr( $img['alt'] ); ?>" <?php echo ( 0 === $idx ) ? 'fetchpriority="high"' : 'loading="lazy"'; ?>>
 						</figure>
 					<?php endforeach; ?>
 				</div>
