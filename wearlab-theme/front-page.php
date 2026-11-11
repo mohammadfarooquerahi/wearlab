@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * The template for displaying the front page
  * Location: front-page.php
@@ -253,28 +253,28 @@ $cta_btn_link = get_theme_mod( 'wearlab_cta_btn_link', '/shop/' );
         <div class="wl-why-us__grid">
             <div class="wl-icon-box">
                 <div class="wl-icon-box__icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l2.2 4.6L19 8.2l-3.5 3.4.8 4.9L12 14.8 7.7 16.5l.8-4.9L5 8.2l4.8-.6L12 3z"/></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="width:24px!important;height:24px!important;display:block;"><path d="M12 3l2.2 4.6L19 8.2l-3.5 3.4.8 4.9L12 14.8 7.7 16.5l.8-4.9L5 8.2l4.8-.6L12 3z"/></svg>
                 </div>
                 <h4 class="wl-icon-box__title">QUALITY FIRST</h4>
                 <p class="wl-icon-box__desc">Premium materials that stand the test of time.</p>
             </div>
             <div class="wl-icon-box">
                 <div class="wl-icon-box__icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16v13H4z"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="width:24px!important;height:24px!important;display:block;"><path d="M4 7h16v13H4z"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/></svg>
                 </div>
                 <h4 class="wl-icon-box__title">MODERN FITS</h4>
                 <p class="wl-icon-box__desc">Silhouettes designed for contemporary style.</p>
             </div>
             <div class="wl-icon-box">
                 <div class="wl-icon-box__icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="width:24px!important;height:24px!important;display:block;"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
                 </div>
                 <h4 class="wl-icon-box__title">EVERYDAY WEAR</h4>
                 <p class="wl-icon-box__desc">Versatile pieces for any occasion.</p>
             </div>
             <div class="wl-icon-box">
                 <div class="wl-icon-box__icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s7-4.4 7-10a7 7 0 1 0-14 0c0 5.6 7 10 7 10z"/><circle cx="12" cy="11" r="2.2"/></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="width:24px!important;height:24px!important;display:block;"><path d="M12 21s7-4.4 7-10a7 7 0 1 0-14 0c0 5.6 7 10 7 10z"/><circle cx="12" cy="11" r="2.2"/></svg>
                 </div>
                 <h4 class="wl-icon-box__title">DESIGNED IN PAKISTAN</h4>
                 <p class="wl-icon-box__desc">Proudly crafted by local artisans.</p>
@@ -347,22 +347,19 @@ $social_photos = array(
 
             <div class="wl-social-pills-wrap">
                 <?php if ( ! empty( $ig_url ) ) : ?>
-                <a href="<?php echo esc_url( $ig_url ); ?>" class="wl-social-pill wl-social-pill--ig" target="_blank" rel="noopener" aria-label="Follow WEARLAB on Instagram">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+                <a href="<?php echo esc_url( $ig_url ); ?>" class="wl-social-pill wl-social-pill--ig" target="_blank" rel="noopener" aria-label="Follow WEARLAB on Instagram"><svg width="16" height="16" style="width:16px!important;height:16px!important;min-width:16px!important;max-width:16px!important;flex-shrink:0!important;display:inline-block!important;vertical-align:middle!important;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
                     <span>@WEARLAB_OFFICIAL</span>
                 </a>
                 <?php endif; ?>
 
                 <?php if ( ! empty( $tt_url ) ) : ?>
-                <a href="<?php echo esc_url( $tt_url ); ?>" class="wl-social-pill wl-social-pill--tt" target="_blank" rel="noopener" aria-label="Follow WEARLAB on TikTok">
-                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.35 0 .68.06.98.17v-3.52a6.34 6.34 0 0 0-.98-.08 6.34 6.34 0 0 0-6.34 6.32 6.34 6.34 0 0 0 6.34 6.33 6.34 6.34 0 0 0 6.33-6.33V9.17a8.28 8.28 0 0 0 4.77 1.48V7.19c-.35 0-.7-.17-1-.5z"/></svg>
+                <a href="<?php echo esc_url( $tt_url ); ?>" class="wl-social-pill wl-social-pill--tt" target="_blank" rel="noopener" aria-label="Follow WEARLAB on TikTok"><svg width="16" height="16" style="width:16px!important;height:16px!important;min-width:16px!important;max-width:16px!important;flex-shrink:0!important;display:inline-block!important;vertical-align:middle!important;" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.35 0 .68.06.98.17v-3.52a6.34 6.34 0 0 0-.98-.08 6.34 6.34 0 0 0-6.34 6.32 6.34 6.34 0 0 0 6.34 6.33 6.34 6.34 0 0 0 6.33-6.33V9.17a8.28 8.28 0 0 0 4.77 1.48V7.19c-.35 0-.7-.17-1-.5z"/></svg>
                     <span>TikTok</span>
                 </a>
                 <?php endif; ?>
 
                 <?php if ( ! empty( $wa_link ) ) : ?>
-                <a href="<?php echo esc_url( $wa_link ); ?>" class="wl-social-pill wl-social-pill--wa" target="_blank" rel="noopener" aria-label="Join WEARLAB WhatsApp Drop Alerts">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                <a href="<?php echo esc_url( $wa_link ); ?>" class="wl-social-pill wl-social-pill--wa" target="_blank" rel="noopener" aria-label="Join WEARLAB WhatsApp Drop Alerts"><svg width="16" height="16" style="width:16px!important;height:16px!important;min-width:16px!important;max-width:16px!important;flex-shrink:0!important;display:inline-block!important;vertical-align:middle!important;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
                     <span>WhatsApp VIP Alerts</span>
                 </a>
                 <?php endif; ?>
@@ -375,8 +372,7 @@ $social_photos = array(
         <a href="<?php echo esc_url( $ig_url ); ?>" class="wl-instagram__item" target="_blank" rel="noopener" title="<?php echo esc_attr( $photo['title'] ); ?>">
             <img src="<?php echo esc_url( $photo['img'] ); ?>" alt="<?php echo esc_attr( $photo['alt'] ); ?>" loading="lazy">
             <span class="wl-instagram__overlay">
-                <span class="wl-instagram__overlay-tag"><?php echo esc_html( $photo['tag'] ); ?></span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                <span class="wl-instagram__overlay-tag"><?php echo esc_html( $photo['tag'] ); ?></span><svg width="24" height="24" style="width:24px!important;height:24px!important;max-width:24px!important;max-height:24px!important;display:block;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
                 <span class="wl-instagram__overlay-label"><?php echo esc_html( $photo['title'] ); ?></span>
             </span>
         </a>

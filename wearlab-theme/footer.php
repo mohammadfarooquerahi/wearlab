@@ -17,20 +17,42 @@
 
             <div class="wl-footer__col">
                 <h2 class="wl-footer__heading"><?php esc_html_e( 'Find Us On', 'wearlab' ); ?></h2>
-                <?php
-                $instagram_url = get_theme_mod( 'wearlab_social_instagram', '' );
-                if ( empty( $instagram_url ) ) {
-                    $instagram_url = 'https://www.instagram.com/';
-                }
-                ?>
-                <a href="<?php echo esc_url( $instagram_url ); ?>" class="wl-footer__social-item" target="_blank" rel="noopener noreferrer">
-                    <svg class="wl-footer__ig-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/>
-                        <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.6"/>
-                        <circle cx="17.4" cy="6.6" r="1" fill="currentColor"/>
-                    </svg>
-                    <span><?php esc_html_e( 'Instagram', 'wearlab' ); ?></span>
-                </a>
+                <div class="wl-footer__social-links">
+                    <?php
+                    $instagram_url = get_theme_mod( 'wearlab_social_instagram', 'https://instagram.com/wearlab_official' );
+                    $tiktok_url    = get_theme_mod( 'wearlab_social_tiktok', 'https://www.tiktok.com/@wearlab' );
+                    $wa_num_footer = get_theme_mod( 'wearlab_social_whatsapp', '923001234567' );
+                    $wa_link_footer= 'https://wa.me/' . preg_replace( '/[^0-9]/', '', $wa_num_footer ) . '?text=' . rawurlencode( 'Hi WEARLAB! I have an inquiry.' );
+                    ?>
+                    <?php if ( ! empty( $instagram_url ) ) : ?>
+                    <a href="<?php echo esc_url( $instagram_url ); ?>" class="wl-footer__social-item" target="_blank" rel="noopener noreferrer">
+                        <svg class="wl-footer__ig-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true" style="width:18px!important;height:18px!important;min-width:18px!important;max-width:18px!important;flex-shrink:0!important;display:inline-block!important;vertical-align:middle!important;">
+                            <rect x="3" y="3" width="18" height="18" rx="5"/>
+                            <circle cx="12" cy="12" r="4.2"/>
+                            <circle cx="17.4" cy="6.6" r="1" fill="currentColor"/>
+                        </svg>
+                        <span><?php esc_html_e( 'Instagram', 'wearlab' ); ?></span>
+                    </a>
+                    <?php endif; ?>
+
+                    <?php if ( ! empty( $tiktok_url ) ) : ?>
+                    <a href="<?php echo esc_url( $tiktok_url ); ?>" class="wl-footer__social-item" target="_blank" rel="noopener noreferrer">
+                        <svg class="wl-footer__tt-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:18px!important;height:18px!important;min-width:18px!important;max-width:18px!important;flex-shrink:0!important;display:inline-block!important;vertical-align:middle!important;">
+                            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.35 0 .68.06.98.17v-3.52a6.34 6.34 0 0 0-.98-.08 6.34 6.34 0 0 0-6.34 6.32 6.34 6.34 0 0 0 6.34 6.33 6.34 6.34 0 0 0 6.33-6.33V9.17a8.28 8.28 0 0 0 4.77 1.48V7.19c-.35 0-.7-.17-1-.5z"/>
+                        </svg>
+                        <span><?php esc_html_e( 'TikTok', 'wearlab' ); ?></span>
+                    </a>
+                    <?php endif; ?>
+
+                    <?php if ( ! empty( $wa_link_footer ) ) : ?>
+                    <a href="<?php echo esc_url( $wa_link_footer ); ?>" class="wl-footer__social-item" target="_blank" rel="noopener noreferrer">
+                        <svg class="wl-footer__wa-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" style="width:18px!important;height:18px!important;min-width:18px!important;max-width:18px!important;flex-shrink:0!important;display:inline-block!important;vertical-align:middle!important;">
+                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                        </svg>
+                        <span><?php esc_html_e( 'WhatsApp', 'wearlab' ); ?></span>
+                    </a>
+                    <?php endif; ?>
+                </div>
             </div>
 
             <div class="wl-footer__col">
