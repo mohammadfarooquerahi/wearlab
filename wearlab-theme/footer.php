@@ -118,6 +118,14 @@
             </ul>
         </div>
 
+        <!-- BIC MUET Incubation Badge -->
+        <?php if ( get_theme_mod( 'wearlab_footer_bic_enable', true ) ) : ?>
+        <div class="footer-bic-badge wl-footer__bic-badge">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/BIC-MUET-logo.png' ); ?>" alt="BIC MUET Logo" class="bic-muet-logo" width="170" height="52" loading="lazy">
+            <span class="bic-muet-text"><?php echo esc_html( get_theme_mod( 'wearlab_footer_bic_text', 'Incubated at BIC MUET Jamshoro' ) ); ?></span>
+        </div>
+        <?php endif; ?>
+
         <p class="wl-footer__copyright">
             <?php
             $copyright = get_theme_mod( 'wearlab_copyright_text', '' );
@@ -129,8 +137,14 @@
             ?>
         </p>
 
-        <div class="wl-footer__dev">
-            <a href="https://www.linkedin.com/in/mohammadfarooque/" target="_blank" rel="noopener noreferrer" class="wl-footer__dev-link" onmouseover="this.style.opacity='0.2'" onmouseout="this.style.opacity='0.1'">Developed by Mohammad Farooque</a>
+        <!-- Developer Credit with Hidden Semantic Metadata (Strictly 10% visible default, 20% on hover) -->
+        <div class="footer-dev-credit wl-footer__dev" style="display: block !important; margin-top: 8px !important; text-align: center !important; opacity: 0.10 !important; transition: opacity 0.3s ease !important;" onmouseenter="this.style.setProperty('opacity','0.20','important')" onmouseleave="this.style.setProperty('opacity','0.10','important')" itemscope itemtype="https://schema.org/Person">
+            <meta itemprop="name" content="Mohammad Farooque">
+            <meta itemprop="jobTitle" content="Website Developer">
+            <meta itemprop="description" content="Computer Science Graduate, Website Developer">
+            <meta itemprop="alumniOf" content="Computer Science Graduate">
+            <meta itemprop="knowsAbout" content="Web Application Development, WordPress, WooCommerce, PHP">
+            <a href="https://www.linkedin.com/in/mohammadfarooque/" target="_blank" rel="noopener noreferrer" itemprop="url" class="wl-footer__dev-link" title="Mohammad Farooque – Computer Science Graduate, Website Developer" aria-label="Developed by Mohammad Farooque - Computer Science Graduate, Website Developer" style="color: #121212 !important; font-size: 11px !important; text-decoration: none !important; cursor: pointer !important; display: inline-block !important; letter-spacing: 0.5px !important;">Developed by Mohammad Farooque.</a>
         </div>
     </div>
 </footer>
@@ -147,28 +161,25 @@ if ( $wa_enabled && ! empty( $wa_num_clean ) ) :
 </a>
 <?php endif; ?>
 
-<!-- Preloader Dismiss Script (Fast instant fade on DOM ready) -->
+<!-- Preloader Dismiss Script (Instant dismiss so site displays immediately under 1 second) -->
 <script id="wl-preloader-dismiss-script">
 (function() {
     function dismissWlPreloader() {
         var loader = document.getElementById('wl-preloader');
-        if (loader && !loader.classList.contains('is-loaded')) {
+        if (loader) {
             loader.classList.add('is-loaded');
             setTimeout(function() {
                 if (loader && loader.parentNode) {
                     loader.parentNode.removeChild(loader);
                 }
-            }, 250);
+            }, 100);
         }
     }
-    if (document.readyState === 'interactive' || document.readyState === 'complete') {
-        dismissWlPreloader();
-    } else {
+    dismissWlPreloader();
+    if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', dismissWlPreloader);
-        window.addEventListener('load', dismissWlPreloader);
     }
-    // Instant safety fail-safe: dismiss after 500ms so site displays immediately
-    setTimeout(dismissWlPreloader, 500);
+    setTimeout(dismissWlPreloader, 150);
 })();
 </script>
 

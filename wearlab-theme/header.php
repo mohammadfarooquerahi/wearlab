@@ -3,6 +3,8 @@
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="author" content="Mohammad Farooque - Computer Science Graduate, Website Developer">
+    <meta name="developer" content="Mohammad Farooque - Computer Science Graduate, Website Developer">
     
     <!-- Preconnect to external resource domains for instant loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -116,7 +118,8 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<!-- Brand Preloader (Guarantees zero unstyled HTML on slow internet) -->
+<?php if ( get_theme_mod( 'wearlab_preloader_enable', false ) ) : ?>
+<!-- Brand Preloader (Ultra-fast instant fade, zero blocking) -->
 <div id="wl-preloader" aria-hidden="true">
     <div class="wl-preloader__brand">
         <?php
@@ -138,16 +141,22 @@
 (function(){
     var p = document.getElementById('wl-preloader');
     if (p) {
-        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        function dismissFast() {
             p.classList.add('is-loaded');
-        } else {
-            document.addEventListener('DOMContentLoaded', function(){ p.classList.add('is-loaded'); });
-            window.addEventListener('load', function(){ p.classList.add('is-loaded'); });
-            setTimeout(function(){ p.classList.add('is-loaded'); }, 600);
+            setTimeout(function(){
+                if (p && p.parentNode) { p.parentNode.removeChild(p); }
+            }, 150);
         }
+        if (document.readyState !== 'loading') {
+            dismissFast();
+        } else {
+            document.addEventListener('DOMContentLoaded', dismissFast);
+        }
+        setTimeout(dismissFast, 300);
     }
 })();
 </script>
+<?php endif; ?>
 
 <?php if ( get_theme_mod( 'wearlab_announcement_enable', true ) ) : ?>
 <!-- Top Announcement / Marquee Bar like KhushPosh -->

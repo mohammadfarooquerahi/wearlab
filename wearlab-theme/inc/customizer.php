@@ -28,6 +28,18 @@ function wearlab_customize_register( $wp_customize ) {
 		'type'    => 'checkbox',
 	) );
 
+	// Preloader Enable (Instant Load vs Splash Screen)
+	$wp_customize->add_setting( 'wearlab_preloader_enable', array(
+		'default'           => false,
+		'sanitize_callback' => 'wp_validate_boolean',
+	) );
+	$wp_customize->add_control( 'wearlab_preloader_enable', array(
+		'label'       => __( 'Enable Brand Preloader Screen', 'wearlab' ),
+		'description' => __( 'Turn off for instantaneous 1-second site load without any logo splash wait.', 'wearlab' ),
+		'section'     => 'wearlab_brand_identity',
+		'type'        => 'checkbox',
+	) );
+
 	// Top Marquee Item 1
 	$wp_customize->add_setting( 'wearlab_topbar_item_1', array(
 		'default'           => 'FREE SHIPPING NATIONWIDE',
@@ -600,6 +612,28 @@ function wearlab_customize_register( $wp_customize ) {
 	$wp_customize->add_section( 'wearlab_footer', array(
 		'title'    => __( 'Footer Settings', 'wearlab' ),
 		'priority' => 50,
+	) );
+
+	// BIC MUET Incubation Badge Enable
+	$wp_customize->add_setting( 'wearlab_footer_bic_enable', array(
+		'default'           => true,
+		'sanitize_callback' => 'wp_validate_boolean',
+	) );
+	$wp_customize->add_control( 'wearlab_footer_bic_enable', array(
+		'label'   => __( 'Show BIC MUET Incubation Badge', 'wearlab' ),
+		'section' => 'wearlab_footer',
+		'type'    => 'checkbox',
+	) );
+
+	// BIC MUET Incubation Text
+	$wp_customize->add_setting( 'wearlab_footer_bic_text', array(
+		'default'           => 'Incubated at BIC MUET Jamshoro',
+		'sanitize_callback' => 'sanitize_text_field',
+	) );
+	$wp_customize->add_control( 'wearlab_footer_bic_text', array(
+		'label'   => __( 'Incubation Badge Text', 'wearlab' ),
+		'section' => 'wearlab_footer',
+		'type'    => 'text',
 	) );
 
 	$wp_customize->add_setting( 'wearlab_footer_country', array(

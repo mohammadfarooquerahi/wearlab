@@ -134,6 +134,8 @@ function wearlab_seo_meta() {
 	echo "\n<!-- WEARLAB SEO Meta Tags -->\n";
 	echo '<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">' . "\n";
 	echo '<meta name="description" content="' . esc_attr( $desc ) . '">' . "\n";
+	echo '<meta name="author" content="Mohammad Farooque - Computer Science Graduate, Website Developer">' . "\n";
+	echo '<meta name="developer" content="Mohammad Farooque - Computer Science Graduate, Website Developer">' . "\n";
 	echo '<link rel="canonical" href="' . esc_url( $url ) . '">' . "\n";
 
 	// OpenGraph (Facebook, WhatsApp, Instagram, LinkedIn)
