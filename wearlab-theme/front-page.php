@@ -33,7 +33,7 @@ $feature_title    = get_theme_mod( 'wearlab_feature_title', 'QUIETLY BOLD.' );
 $feature_text     = get_theme_mod( 'wearlab_feature_text', 'Engineered for the modern wardrobe, our pieces combine minimalist aesthetics with superior craftsmanship.' );
 $feature_btn_text = get_theme_mod( 'wearlab_feature_btn_text', 'SHOP WEARLAB' );
 $feature_btn_link = get_theme_mod( 'wearlab_feature_btn_link', '/shop/' );
-$feature_img      = get_theme_mod( 'wearlab_feature_img', '' ) ?: $theme_uri . '/assets/images/p2 pic3.jpeg';
+$feature_img      = get_theme_mod( 'wearlab_feature_img', '' ) ?: $theme_uri . '/assets/images/p2-pic3.jpeg';
 
 // 6. Reviews Settings
 $reviews_overline = get_theme_mod( 'wearlab_reviews_overline', 'CUSTOMER LOVE' );
@@ -162,7 +162,7 @@ $cta_btn_link = get_theme_mod( 'wearlab_cta_btn_link', '/shop/' );
                         'badge' => 'NEW ARRIVAL',
                         'sizes' => array( 'S', 'M', 'L', 'XL' ),
                         'link'  => '/product-category/drop-shoulders/',
-                        'img'   => $theme_uri . '/assets/images/p2 pic1.jpeg',
+                        'img'   => $theme_uri . '/assets/images/p2-pic1.jpeg',
                     ),
                     array(
                         'name'  => 'Drop Shoulder Vibes',
@@ -170,7 +170,7 @@ $cta_btn_link = get_theme_mod( 'wearlab_cta_btn_link', '/shop/' );
                         'badge' => 'BEST SELLER',
                         'sizes' => array( 'S', 'M', 'L', 'XL' ),
                         'link'  => '/product-category/drop-shoulders/',
-                        'img'   => $theme_uri . '/assets/images/p1 pic1.jpeg',
+                        'img'   => $theme_uri . '/assets/images/p1-pic1.jpeg',
                     ),
                     array(
                         'name'  => 'WEARLAB Polo',
@@ -234,15 +234,17 @@ $cta_btn_link = get_theme_mod( 'wearlab_cta_btn_link', '/shop/' );
 
 <!-- 5. Product Feature Banner -->
 <section class="wl-product-feature">
-    <div class="wl-product-feature__inner">
-        <div class="wl-product-feature__content">
-            <p class="wl-overline"><?php echo esc_html( $feature_overline ); ?></p>
-            <h2 class="wl-section-title"><?php echo esc_html( $feature_title ); ?></h2>
-            <p><?php echo esc_html( $feature_text ); ?></p>
-            <a href="<?php echo esc_url( home_url( $feature_btn_link ) ); ?>" class="wl-btn wl-btn--primary"><?php echo esc_html( $feature_btn_text ); ?></a>
-        </div>
-        <div class="wl-product-feature__image-wrapper">
-            <img src="<?php echo esc_url( $feature_img ); ?>" alt="<?php echo esc_attr( $feature_title ); ?>" class="wl-product-feature__image">
+    <div class="wl-container">
+        <div class="wl-product-feature__inner">
+            <div class="wl-product-feature__content">
+                <p class="wl-overline"><?php echo esc_html( $feature_overline ); ?></p>
+                <h2 class="wl-section-title"><?php echo esc_html( $feature_title ); ?></h2>
+                <p><?php echo esc_html( $feature_text ); ?></p>
+                <a href="<?php echo esc_url( home_url( $feature_btn_link ) ); ?>" class="wl-btn wl-btn--primary"><?php echo esc_html( $feature_btn_text ); ?></a>
+            </div>
+            <div class="wl-product-feature__image-wrapper">
+                <img src="<?php echo esc_url( str_replace( array( 'p1 pic', 'p2 pic', 'p1%20pic', 'p2%20pic' ), array( 'p1-pic', 'p2-pic', 'p1-pic', 'p2-pic' ), $feature_img ) ); ?>" alt="<?php echo esc_attr( $feature_title ); ?>" class="wl-product-feature__image" loading="lazy">
+            </div>
         </div>
     </div>
 </section>
@@ -253,28 +255,28 @@ $cta_btn_link = get_theme_mod( 'wearlab_cta_btn_link', '/shop/' );
         <div class="wl-why-us__grid">
             <div class="wl-icon-box">
                 <div class="wl-icon-box__icon" aria-hidden="true">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="width:24px!important;height:24px!important;display:block;"><path d="M12 3l2.2 4.6L19 8.2l-3.5 3.4.8 4.9L12 14.8 7.7 16.5l.8-4.9L5 8.2l4.8-.6L12 3z"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="width:20px!important;height:20px!important;max-width:20px!important;max-height:20px!important;display:block;margin:0 auto;"><path d="M12 3l2.2 4.6L19 8.2l-3.5 3.4.8 4.9L12 14.8 7.7 16.5l.8-4.9L5 8.2l4.8-.6L12 3z"/></svg>
                 </div>
                 <h4 class="wl-icon-box__title">QUALITY FIRST</h4>
                 <p class="wl-icon-box__desc">Premium materials that stand the test of time.</p>
             </div>
             <div class="wl-icon-box">
                 <div class="wl-icon-box__icon" aria-hidden="true">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="width:24px!important;height:24px!important;display:block;"><path d="M4 7h16v13H4z"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="width:20px!important;height:20px!important;max-width:20px!important;max-height:20px!important;display:block;margin:0 auto;"><path d="M4 7h16v13H4z"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/></svg>
                 </div>
                 <h4 class="wl-icon-box__title">MODERN FITS</h4>
                 <p class="wl-icon-box__desc">Silhouettes designed for contemporary style.</p>
             </div>
             <div class="wl-icon-box">
                 <div class="wl-icon-box__icon" aria-hidden="true">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="width:24px!important;height:24px!important;display:block;"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="width:20px!important;height:20px!important;max-width:20px!important;max-height:20px!important;display:block;margin:0 auto;"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
                 </div>
                 <h4 class="wl-icon-box__title">EVERYDAY WEAR</h4>
                 <p class="wl-icon-box__desc">Versatile pieces for any occasion.</p>
             </div>
             <div class="wl-icon-box">
                 <div class="wl-icon-box__icon" aria-hidden="true">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="width:24px!important;height:24px!important;display:block;"><path d="M12 21s7-4.4 7-10a7 7 0 1 0-14 0c0 5.6 7 10 7 10z"/><circle cx="12" cy="11" r="2.2"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="width:20px!important;height:20px!important;max-width:20px!important;max-height:20px!important;display:block;margin:0 auto;"><path d="M12 21s7-4.4 7-10a7 7 0 1 0-14 0c0 5.6 7 10 7 10z"/><circle cx="12" cy="11" r="2.2"/></svg>
                 </div>
                 <h4 class="wl-icon-box__title">DESIGNED IN PAKISTAN</h4>
                 <p class="wl-icon-box__desc">Proudly crafted by local artisans.</p>
@@ -283,9 +285,9 @@ $cta_btn_link = get_theme_mod( 'wearlab_cta_btn_link', '/shop/' );
     </div>
 </section>
 
-<!-- 6. Social Media & Streetwear Community Showcase -->
+<!-- 7. Instagram & Community Showcase -->
 <?php
-$social_bg       = get_theme_mod( 'wearlab_social_bg_img', '' ) ?: $theme_uri . '/assets/images/p2 pic3.jpeg';
+$social_enable   = get_theme_mod( 'wearlab_social_enable', true );
 $social_overline = get_theme_mod( 'wearlab_social_overline', 'COMMUNITY & STREET CULTURE' );
 $social_title    = get_theme_mod( 'wearlab_social_title', 'FOLLOW THE LAB.' );
 $social_subtitle = get_theme_mod( 'wearlab_social_subtitle', 'Tag @wearlab_official to be featured in upcoming drops.' );
@@ -294,107 +296,96 @@ $tt_url          = get_theme_mod( 'wearlab_social_tiktok', 'https://www.tiktok.c
 $wa_num          = get_theme_mod( 'wearlab_social_whatsapp', '923001234567' );
 $wa_link         = 'https://wa.me/' . preg_replace( '/[^0-9]/', '', $wa_num ) . '?text=' . rawurlencode( 'Hi WEARLAB! I want to join the WhatsApp drop alerts.' );
 
+// Sanitize any database-stored URLs that had spaces to the clean hyphenated files
+$clean_img = function( $val, $default_rel ) use ( $theme_uri ) {
+    $url = ! empty( $val ) ? $val : ( $theme_uri . $default_rel );
+    $url = str_replace( array( 'p1 pic', 'p2 pic', 'p1%20pic', 'p2%20pic' ), array( 'p1-pic', 'p2-pic', 'p1-pic', 'p2-pic' ), $url );
+    return str_replace( ' ', '%20', $url );
+};
+
 $social_photos = array(
 	array(
-		'img'   => get_theme_mod( 'wearlab_social_img_1', '' ) ?: $theme_uri . '/assets/images/p1 pic1.jpeg',
+		'img'   => $clean_img( get_theme_mod( 'wearlab_social_img_1', '' ), '/assets/images/p1-pic1.jpeg' ),
 		'title' => 'Drop Shoulder Vibes Tee',
-		'tag'   => '#VIBES',
-		'alt'   => 'WEARLAB Vibes Drop Shoulder Tee - Back Graphic Artwork',
+		'alt'   => 'WEARLAB Vibes Drop Shoulder Tee',
 	),
 	array(
-		'img'   => get_theme_mod( 'wearlab_social_img_2', '' ) ?: $theme_uri . '/assets/images/p2 pic1.jpeg',
+		'img'   => $clean_img( get_theme_mod( 'wearlab_social_img_2', '' ), '/assets/images/p2-pic1.jpeg' ),
 		'title' => 'Drop Shoulder Retro Tee',
-		'tag'   => '#RETRO',
-		'alt'   => 'WEARLAB Retro Drop Shoulder Tee - Back Floral Artwork',
+		'alt'   => 'WEARLAB Retro Drop Shoulder Tee',
 	),
 	array(
-		'img'   => get_theme_mod( 'wearlab_social_img_3', '' ) ?: $theme_uri . '/assets/images/p1 pic2.jpeg',
+		'img'   => $clean_img( get_theme_mod( 'wearlab_social_img_3', '' ), '/assets/images/p1-pic2.jpeg' ),
 		'title' => 'Good Vibes Only Fit',
-		'tag'   => '#STREETWEAR',
 		'alt'   => 'WEARLAB Good Vibes Only Front Graphic',
 	),
 	array(
-		'img'   => get_theme_mod( 'wearlab_social_img_4', '' ) ?: $theme_uri . '/assets/images/p2 pic3.jpeg',
+		'img'   => $clean_img( get_theme_mod( 'wearlab_social_img_4', '' ), '/assets/images/p2-pic3.jpeg' ),
 		'title' => 'Quietly Bold Campaign',
-		'tag'   => '#QUIETLYBOLD',
 		'alt'   => 'WEARLAB Quietly Bold Campaign Poster',
 	),
 	array(
-		'img'   => get_theme_mod( 'wearlab_social_img_5', '' ) ?: $theme_uri . '/assets/images/p2 pic2.jpeg',
+		'img'   => $clean_img( get_theme_mod( 'wearlab_social_img_5', '' ), '/assets/images/p2-pic2.jpeg' ),
 		'title' => 'SSTZZ Retro Fit',
-		'tag'   => '#WEARLABFIT',
-		'alt'   => 'WEARLAB SSTZZ Retro Streetwear Tee Front',
+		'alt'   => 'WEARLAB SSTZZ Retro Streetwear Tee',
 	),
 	array(
-		'img'   => get_theme_mod( 'wearlab_social_img_6', '' ) ?: $theme_uri . '/assets/images/p1 pic3.jpeg',
+		'img'   => $clean_img( get_theme_mod( 'wearlab_social_img_6', '' ), '/assets/images/p1-pic3.jpeg' ),
 		'title' => 'Desert Sand Silhouette',
-		'tag'   => '#LABDROP',
-		'alt'   => 'WEARLAB Vibes Oversized Tee Desert Sand Mockup',
+		'alt'   => 'WEARLAB Vibes Oversized Tee Desert Sand',
 	),
 );
+
+if ( $social_enable ) :
 ?>
-<section class="wl-instagram wl-social-showcase" style="background-image: url('<?php echo esc_url( $social_bg ); ?>');">
-    <div class="wl-social-showcase__overlay-bg" aria-hidden="true"></div>
+<section class="wl-instagram">
     <div class="wl-container">
         <div class="wl-instagram__header">
             <?php if ( ! empty( $social_overline ) ) : ?>
-                <span class="wl-social-showcase__overline"><?php echo esc_html( $social_overline ); ?></span>
+                <span class="wl-overline"><?php echo esc_html( $social_overline ); ?></span>
             <?php endif; ?>
-            <h2 class="wl-section-title wl-social-showcase__title"><?php echo esc_html( $social_title ); ?></h2>
+            <h2 class="wl-section-title"><?php echo esc_html( $social_title ); ?></h2>
             <?php if ( ! empty( $social_subtitle ) ) : ?>
-                <p class="wl-social-showcase__subtitle"><?php echo esc_html( $social_subtitle ); ?></p>
+                <p class="wl-section-desc"><?php echo esc_html( $social_subtitle ); ?></p>
             <?php endif; ?>
 
             <div class="wl-social-pills-wrap">
                 <?php if ( ! empty( $ig_url ) ) : ?>
-                <a href="<?php echo esc_url( $ig_url ); ?>" class="wl-social-pill wl-social-pill--ig" target="_blank" rel="noopener" aria-label="Follow WEARLAB on Instagram"><svg width="16" height="16" style="width:16px!important;height:16px!important;min-width:16px!important;max-width:16px!important;flex-shrink:0!important;display:inline-block!important;vertical-align:middle!important;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+                <a href="<?php echo esc_url( $ig_url ); ?>" class="wl-social-pill wl-social-pill--ig" target="_blank" rel="noopener" aria-label="Follow WEARLAB on Instagram">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="width:14px!important;height:14px!important;min-width:14px!important;max-width:14px!important;flex-shrink:0!important;display:inline-block!important;vertical-align:middle!important;"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
                     <span>@WEARLAB_OFFICIAL</span>
                 </a>
                 <?php endif; ?>
 
                 <?php if ( ! empty( $tt_url ) ) : ?>
-                <a href="<?php echo esc_url( $tt_url ); ?>" class="wl-social-pill wl-social-pill--tt" target="_blank" rel="noopener" aria-label="Follow WEARLAB on TikTok"><svg width="16" height="16" style="width:16px!important;height:16px!important;min-width:16px!important;max-width:16px!important;flex-shrink:0!important;display:inline-block!important;vertical-align:middle!important;" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.35 0 .68.06.98.17v-3.52a6.34 6.34 0 0 0-.98-.08 6.34 6.34 0 0 0-6.34 6.32 6.34 6.34 0 0 0 6.34 6.33 6.34 6.34 0 0 0 6.33-6.33V9.17a8.28 8.28 0 0 0 4.77 1.48V7.19c-.35 0-.7-.17-1-.5z"/></svg>
+                <a href="<?php echo esc_url( $tt_url ); ?>" class="wl-social-pill wl-social-pill--tt" target="_blank" rel="noopener" aria-label="Follow WEARLAB on TikTok">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:14px!important;height:14px!important;min-width:14px!important;max-width:14px!important;flex-shrink:0!important;display:inline-block!important;vertical-align:middle!important;"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.35 0 .68.06.98.17v-3.52a6.34 6.34 0 0 0-.98-.08 6.34 6.34 0 0 0-6.34 6.32 6.34 6.34 0 0 0 6.34 6.33 6.34 6.34 0 0 0 6.33-6.33V9.17a8.28 8.28 0 0 0 4.77 1.48V7.19c-.35 0-.7-.17-1-.5z"/></svg>
                     <span>TikTok</span>
                 </a>
                 <?php endif; ?>
 
                 <?php if ( ! empty( $wa_link ) ) : ?>
-                <a href="<?php echo esc_url( $wa_link ); ?>" class="wl-social-pill wl-social-pill--wa" target="_blank" rel="noopener" aria-label="Join WEARLAB WhatsApp Drop Alerts"><svg width="16" height="16" style="width:16px!important;height:16px!important;min-width:16px!important;max-width:16px!important;flex-shrink:0!important;display:inline-block!important;vertical-align:middle!important;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                <a href="<?php echo esc_url( $wa_link ); ?>" class="wl-social-pill wl-social-pill--wa" target="_blank" rel="noopener" aria-label="Join WEARLAB WhatsApp Drop Alerts">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="width:14px!important;height:14px!important;min-width:14px!important;max-width:14px!important;flex-shrink:0!important;display:inline-block!important;vertical-align:middle!important;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
                     <span>WhatsApp VIP Alerts</span>
                 </a>
                 <?php endif; ?>
             </div>
         </div>
-    </div>
 
-    <div class="wl-instagram__grid">
-        <?php foreach ( $social_photos as $photo ) : ?>
-        <a href="<?php echo esc_url( $ig_url ); ?>" class="wl-instagram__item" target="_blank" rel="noopener" title="<?php echo esc_attr( $photo['title'] ); ?>">
-            <img src="<?php echo esc_url( $photo['img'] ); ?>" alt="<?php echo esc_attr( $photo['alt'] ); ?>" loading="lazy">
-            <span class="wl-instagram__overlay">
-                <span class="wl-instagram__overlay-tag"><?php echo esc_html( $photo['tag'] ); ?></span><svg width="24" height="24" style="width:24px!important;height:24px!important;max-width:24px!important;max-height:24px!important;display:block;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-                <span class="wl-instagram__overlay-label"><?php echo esc_html( $photo['title'] ); ?></span>
-            </span>
-        </a>
-        <?php endforeach; ?>
-    </div>
-
-    <div class="wl-social-showcase__ticker">
-        <div class="wl-social-showcase__ticker-inner">
-            <span>STREETWEAR CULTURE</span>
-            <span class="wl-dot">•</span>
-            <span>100+ STREETWEAR FITS</span>
-            <span class="wl-dot">•</span>
-            <span>CASH ON DELIVERY NATIONWIDE</span>
-            <span class="wl-dot">•</span>
-            <span>FREE DELIVERY ON 3+ SHIRTS</span>
-            <span class="wl-dot">•</span>
-            <span>DESIGNED IN PAKISTAN</span>
-            <span class="wl-dot">•</span>
-            <span>WEARLAB.STORE</span>
+        <div class="wl-instagram__grid">
+            <?php foreach ( $social_photos as $photo ) : ?>
+            <a href="<?php echo esc_url( $ig_url ); ?>" class="wl-instagram__item" target="_blank" rel="noopener" title="<?php echo esc_attr( $photo['title'] ); ?>">
+                <img src="<?php echo esc_url( $photo['img'] ); ?>" alt="<?php echo esc_attr( $photo['alt'] ); ?>" loading="lazy">
+                <span class="wl-instagram__overlay">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" style="width:22px!important;height:22px!important;max-width:22px!important;max-height:22px!important;display:block;"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+                </span>
+            </a>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
+<?php endif; ?>
 
 <!-- 8. Customer Reviews -->
 <section class="wl-reviews">
